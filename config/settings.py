@@ -85,9 +85,9 @@ DATABASES = {
     # DATABASE_URL=postgres://user:password@hostname_or_ip:port/database_name
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'internship_db',
-    'USER': 'sm1552',
-    'PASSWORD': 'snehitha',
+    'NAME': 'postgres',
+    'USER': 'ha1088',
+    'PASSWORD': 'Infy@1234',
     'HOST': '127.0.0.1',
     'PORT': '5432',
     }
