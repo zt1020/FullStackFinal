@@ -19,10 +19,9 @@ class Student(models.Model):
     degree = models.CharField("Degree Name", max_length=255)
     linkedin = models.CharField("LinkedIn Profile", max_length=255)
 
-
     def __str__(self):
-       name=self.last_name+self.first_name
-       return name
+        name=self.last_name+self.first_name
+        return name
 
 
 class Internship(models.Model):
@@ -41,8 +40,9 @@ class Internship(models.Model):
     supervisor_phone = models.CharField("Supervisor Phone", max_length = 100,null=True)
 
     def __str__(self):
-       company_name=self.organization_name
-       return company_name
+
+        company_name=self.organization_name
+        return str(company_name)
 
 
 class InternshipAssignment(models.Model):
@@ -50,10 +50,20 @@ class InternshipAssignment(models.Model):
     InternshipAssignment data model
     """
     id=models.AutoField(primary_key=True)
-    studentid = models.ForeignKey(Student,db_column='student_id',on_delete=models.CASCADE,default=1,null=True)
-    internshipid = models.ForeignKey(Internship,db_column="internship_id",on_delete=models.CASCADE,null=True)
-    course_id = models.CharField("Course ID", max_length = 50)
-    credits = models.CharField("Credits", max_length = 10)
+    studentid = models.ForeignKey(
+        Student,db_column='student_id',
+        on_delete=models.CASCADE,default=1,null=True
+    )
+    internshipid = models.ForeignKey(
+        Internship,db_column="internship_id",
+        on_delete=models.CASCADE,null=True
+    )
+    course_id = models.CharField(
+        "Course ID", max_length = 50, default = 'COMP805',null=True
+    )
+    student_credits = models.CharField(
+        "student credits", max_length = 10, default = 3, null=True
+    )
     semester = models.CharField("Semester", max_length = 30)
     year = models.CharField("Year", max_length = 10)
     instructor = models.CharField("Instructor", max_length = 40)
@@ -62,5 +72,5 @@ class InternshipAssignment(models.Model):
 
 
     def __str__(self):
-       instructor_name=self.instructor
-       return instructor_name
+        instructor_name=self.instructor
+        return str(instructor_name)
