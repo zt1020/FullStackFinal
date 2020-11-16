@@ -2,13 +2,12 @@
 {% block content %}
 
 <br/>
-<h5>Import File</h5>
 <br/>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="document">
     &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
     <button type="submit"> Import </button>
-</form>
 
+</form>
 {% endblock content %}

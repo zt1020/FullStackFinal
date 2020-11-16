@@ -1,34 +1,92 @@
-{% load static %}
-<!doctype html>
-<html>
-<head>
-    <title class="bg_black" > UNHM Internship Portal</title>
-    <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
-  <div class="container">
-    <header>
-    <div class="row pt-2 pb-2">
-      <div class="col-9">
-        <div class="logo">
-        <img src="https://paulcollege.unh.edu/cep/sites/paulcollege.unh.edu.cep/themes/cep/logo.png">
-        </div>
-      </div>
-      <div class="=col-3 pt-3">
-        <a class="btn btn-outline-primary" href="login.html">Log In</a>
-      </div>
-    </div>
-<div class="row">
-  <div class="col-12 title pt-1">
-      <p class="h3">UNHM Internship Portal</p>
-  </div>
-  </div>
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+  <head>
 
-  </header>
-    {% block content %}
-    {% endblock content %}
-             <!-- Content here -->
+    <title>{% block title %}UNH-Internship-Portal{% endblock title %}</title>
+
+
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    {% block css %}
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    {% endblock %}
+
+  </head>
+
+  <body>
+
+    <div class="mb-1">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul>
+        <div class="logo" style="width: 1300px;">
+          <img src="https://paulcollege.unh.edu/cep/sites/paulcollege.unh.edu.cep/themes/cep/logo.png">
+
+       </div>
+       </ul>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+
+              <h3><a class="nav-link nav text-primary"
+
+
+                href="{% url 'import_file' %}">&nbsp;  &nbsp;  &nbsp;
+                Import <span class="sr-only">(current)</span></a></h3>
+            </li>
+
+            <li class="nav-item active" >
+              <h3><a class="nav-link text-primary" href="{% url 'home' %}">Sign up</a></h3>
+            </li>
+
+            <div >
+
+            <li class="nav-item active">
+              <h3><a class="nav-link text-primary" href="{% url 'home' %}">Sign out</a></h3>
+            </li>
+           </div>
+
+          </ul>
+
+        </div>
+      </nav>
+
     </div>
-</body>
+
+    <div class="container">
+
+
+
+      {% block content %}
+      <h1><p class="text-primary">Welcome to UNH Internship Portal!!</p></h1>
+      {% endblock content %}
+
+    </div> <!-- /container -->
+
+    {% block modal %}{% endblock modal %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+      <!-- Bootstrap JS and its dependencies-->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+      <!-- Your stuff: Third-party javascript libraries go here -->
+
+
+      <!-- place project specific Javascript in this file -->
+      <script src="{% static 'js/project.js' %}"></script>
+    {% endblock javascript %}
+  </body>
 </html>
