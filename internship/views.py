@@ -6,58 +6,8 @@ from internship.models import Student,Internship,InternshipAssignment
 import xlsxwriter
 from faker import Faker
 
-w_data = xlsxwriter.Workbook("new_data.xlsx")
-s_data = w_data.add_worksheet()
-
-s_data.write("A1","Last Name")
-s_data.write("B1","First Name")
-s_data.write("C1","Student ID")
-s_data.write("D1","Major Name")
-s_data.write("E1","Degree Name")
-s_data.write("F1","Phone Number")
-s_data.write("G1","School Email")
-s_data.write("H1","LinkedIn Profile")
-s_data.write("I1","Course ID")
-s_data.write("J1","Credits")
-s_data.write("K1","Semester")
-s_data.write("L1","Year")
-s_data.write("M1","Instructor")
-s_data.write("N1","Internship Position")
-s_data.write("O1","Pay")
-s_data.write("P1","Start Date")
-s_data.write("Q1","End Date")
-s_data.write("R1","Organization")
-s_data.write("S1","URL")
-s_data.write("T1","Mailing Address")
-s_data.write("U1","City")
-s_data.write("V1","State")
-s_data.write("W1","City, State Zip")
-s_data.write("X1","Supervisor Name")
-s_data.write("Y1","Supervisor Position")
-s_data.write("Z1","Supervisor Email")
-s_data.write("AA1","Supervisor Phone")
 
 f_data = Faker()
-
-# def generate_data(f_data):
-#     name = f_data.name()
-#     email = f_data.email()
-#     ssn = f_data.ssn()
-#     phone_number = f_data.phone_number()
-#     address = f_data.address()
-#     return name, email, ssn, phone_number, address
-#
-# for i in range (0,1000):
-#     name, email, ssn, phone_number, address = generate_data(f_data)
-#     s_data.write(i, 0, name)
-#     s_data.write(i, 1, email)
-#     s_data.write(i, 2, ssn)
-#     s_data.write(i, 3, phone_number)
-#     s_data.write(i, 4, address)
-
-
-w_data.close()
-
 
 def import_file(request):
     if request.method=='POST':
@@ -74,27 +24,32 @@ def import_data(request):
 
 def import_Student(sheet):
 
-    for i in range(2, 115):
-        last_name=sheet['A'+str(i)].value
-        first_name=sheet['B'+str(i)].value
+    for i in range(2, 10):
+
+        student_id=str(i-1)
+        last_name=f_data.last_name()
+        first_name=f_data.first_name()
         major=sheet['D'+str(i)].value
-        school_email=sheet['G'+str(i)].value
+        school_email=f_data.email()
         unh_id=school_email[:6]
         degree=sheet['E'+str(i)].value
-        linkedin=sheet['H'+str(i)].value
+        linkedin=f_data.url()
 
 
-        s = Student(unh_id=unh_id,last_name=last_name,first_name=first_name, school_email=  school_email, major = major, degree=  degree, linkedin = linkedin)
+        s = Student(student_id=student_id,\
+        unh_id=unh_id,last_name=last_name,first_name=first_name, school_email=  school_email, major = major, degree=  degree, linkedin = linkedin)
         s.save()
 
 
 def import_internship(sheet):
 
-    for i in range(2, 115):
+    for i in range(2, 10):
+
+        internship_id=str(i-1)
         position=sheet['N'+str(i)].value
         pay=sheet['O'+str(i)].value
         organization_name=sheet['R'+str(i)].value
-        organization_url=sheet['S'+str(i)].value
+        organization_url=f_data.url()
         organization_address=sheet['T'+str(i)].value
         supervisor_name=sheet['X'+str(i)].value
         supervisor_position=sheet['Y'+str(i)].value
@@ -114,14 +69,15 @@ def import_internship(sheet):
 def import_internshipAssignment(sheet):
 
 
-    for i in range(2, 115):
-        course_id=sheet['I'+str(i)].value
-        credits=sheet['J'+str(i)].value
+    for i in range(2, 10):
+
+        course_id='COMP805'
+        credits='3'
         semester=sheet['K'+str(i)].value
         year=sheet['L'+str(i)].value
         instructor=sheet['M'+str(i)].value
-        start_date=sheet['P'+str(i)].value
-        end_date=sheet['Q'+str(i)].value
+        start_date=f_data.date()
+        end_date=f_data.date()
 
         i_a = InternshipAssignment(course_id=course_id,credits=credits,
         semester=semester,year=year,instructor=instructor,start_date=start_date,end_date=end_date)
