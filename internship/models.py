@@ -10,8 +10,8 @@ class Student(models.Model):
     """
     student data model
     """
-    student_id=models.AutoField(primary_key=True)
-    unh_id = models.CharField("UNH ID", blank = False, max_length=11)
+    student_id=models.IntegerField(primary_key=True)
+    unh_id = models.CharField("UNH_id", unique = True, blank = False, max_length=15)
     last_name = models.CharField("Last Name", max_length=255)
     first_name = models.CharField("First Name", max_length=255)
     school_email = models.EmailField("School Email", max_length=255)
@@ -20,15 +20,15 @@ class Student(models.Model):
     linkedin = models.CharField("LinkedIn Profile", max_length=255)
 
     def __str__(self):
-        name=self.last_name+self.first_name
-        return name
+        sid=self.student_id
+        return str(sid)
 
 
 class Internship(models.Model):
     """
     Internship data model
     """
-    internship_id = models.AutoField(primary_key = True)
+    internship_id = models.IntegerField(primary_key = True)
     position = models.CharField("Internship Position", max_length = 50)
     pay = models.CharField("Pay", max_length = 7,null=True)
     organization_name = models.CharField("Organization", max_length = 255)
@@ -40,16 +40,15 @@ class Internship(models.Model):
     supervisor_phone = models.CharField("Supervisor Phone", max_length = 100,null=True)
 
     def __str__(self):
-
-        company_name=self.organization_name
-        return str(company_name)
+        iid=self.internship_id
+        return str(iid)
 
 
 class InternshipAssignment(models.Model):
     """
     InternshipAssignment data model
     """
-    id=models.AutoField(primary_key=True)
+
     studentid = models.ForeignKey(
         Student,db_column='student_id',
         on_delete=models.CASCADE,default=1,null=True
