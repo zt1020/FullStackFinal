@@ -11,6 +11,8 @@ from django.views.generic import TemplateView
 # import xlsxwriter
 from faker import Faker
 from internship.models import Student,Internship,InternshipAssignment
+from django.views.generic import ListView
+from .models import Student, InternshipAssignment,Internship
 
 f_data = Faker()
 
@@ -39,11 +41,11 @@ def import_student(sheet):
     """
     for i in range(2, 10):
         student_id=str(i-1)
+        unh_id=str(i-1)
         last_name=f_data.last_name()
         first_name=f_data.first_name()
         major=sheet['D'+str(i)].value
         school_email=f_data.email()
-        unh_id=school_email[:6]
         degree=sheet['E'+str(i)].value
         linkedin=f_data.url()
 
@@ -61,7 +63,7 @@ def import_internship(sheet):
     """
     for i in range(2, 10):
 
-        # internship_id=str(i-1)
+        internship_id=str(i-1)
         position=sheet['N'+str(i)].value
         pay=sheet['O'+str(i)].value
         organization_name=sheet['R'+str(i)].value
@@ -74,6 +76,7 @@ def import_internship(sheet):
 
 
         import_i = Internship(
+            internship_id=internship_id,
             position=position,
             pay=pay,
             organization_name=organization_name,
@@ -115,3 +118,19 @@ class HomepageView(TemplateView):
     This creates class based HomepageView
     """
     template_name = 'home.html'
+
+def display_students(request):
+    button = "students"
+    student_items = Student.objects.all()
+    context = {
+        'button' : button,
+        'student_items' : student_items,
+
+    }
+    return render(request, 'home.html', context)
+
+class InternshipAssignmentListView(ListView):
+    model = InternshipAssignment.objects.all()
+
+class InternshipListView(ListView):
+    model = Internship.objects.all()
