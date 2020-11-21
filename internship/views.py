@@ -13,6 +13,7 @@ from faker import Faker
 from internship.models import Student,Internship,InternshipAssignment
 from django.views.generic import ListView
 from .models import Student, InternshipAssignment,Internship
+from .forms import StudentSearchForm
 
 f_data = Faker()
 
@@ -122,12 +123,22 @@ class HomepageView(TemplateView):
 def display_students(request):
     button = "students"
     student_items = Student.objects.all()
+    form = StudentSearchForm(request.POST or None)
     context = {
         'button' : button,
         'student_items' : student_items,
-
+        'form' : form
     }
+    if request.method == 'POST':
+        student_items = Student.objects.filter(first_name__icontains=form['first_name'].value(),
+                                          last_name__icontains=form['last_name'].value()
+                                          )
+        context = {
+            "student_items" : student_items,
+            "form": form
+        }
     return render(request, 'home.html', context)
+
 
 class InternshipAssignmentListView(ListView):
     model = InternshipAssignment.objects.all()
