@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'internship',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -86,8 +87,8 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'internship_db',
-    'USER': 'ha1088',
-    'PASSWORD': 'Infy@1234',
+    'USER': 'sm1552',
+    'PASSWORD': 'snehitha',
     'HOST': '127.0.0.1',
     'PORT': '5432',
     }

@@ -12,8 +12,8 @@ class Student(models.Model):
     """
     student_id=models.IntegerField(primary_key=True)
     unh_id = models.CharField("UNH_id", unique = True, blank = False, max_length=15)
-    last_name = models.CharField("Last Name", max_length=255)
-    first_name = models.CharField("First Name", max_length=255)
+    last_name = models.CharField("Last Name", max_length=255, blank = True)
+    first_name = models.CharField("First Name", max_length=255, blank = True)
     school_email = models.EmailField("School Email", max_length=255)
     major = models.CharField("Major Name", max_length=255)
     degree = models.CharField("Degree Name", max_length=255)
