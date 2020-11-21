@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
     {% block content %}
         <script src="/static/sorttable.js"></script>
-        <table id="example" class="sortable" style="text-align:center;" cellspacing="10">
+        <table id="example" class="sortable" style="text-align:center;" cellspacing="30">
 
 
             {% if button == "students" %}
-            <h3>Students</h3>
 
             <thead>
                 <tr>
@@ -20,10 +19,7 @@
                 </tr>
             </thead>
             {% endif %}
-
-
-
-
+            
             <tbody>
 
                 {% for student_item in student_items %}

@@ -6,7 +6,8 @@
 
     {% block css %}
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     {% endblock %}
@@ -21,11 +22,13 @@
         <li class="nav-item active">
 
         <div class="logo" style="width: 1100px;">
-          <img src="https://paulcollege.unh.edu/cep/sites/paulcollege.unh.edu.cep/themes/cep/logo.png">
+
+          <h3> <a class="nav-link text-light"> UNH-Internship </a><h3>
+
+          <!-- <img src="https://paulcollege.unh.edu/cep/sites/paulcollege.unh.edu.cep/themes/cep/logo.png"> -->
 
        </div>
-
-
+       
        <li class="nav-item active">
 
          <h3><a class="nav-link text-light" href="{% url 'display_students' %}" role="button"> Student </a><h3>
@@ -33,11 +36,6 @@
        </li>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
-
-
-
 
             <li class="nav-item active">
 
