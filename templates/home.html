@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
     {% block content %}
         <script src="/static/sorttable.js"></script>
+
+        <form method="post" action="">
+          {% csrf_token %}
+          {{form|crispy}}
+          <input class="btn btn-primary" type="submit" value="Search" />
+
         <table id="example" class="sortable" style="text-align:center;" cellspacing="30">
-
-
-            {% if button == "students" %}
 
             <thead>
                 <tr>
@@ -18,8 +22,7 @@
                     <th>Linkedin</th>
                 </tr>
             </thead>
-            {% endif %}
-            
+
             <tbody>
 
                 {% for student_item in student_items %}
@@ -34,10 +37,8 @@
                     <td>{{student_item.linkedin}}</td>
 
                 </tr>
-
                 {% endfor %}
-
-
             </tbody>
         </table>
+        </form>
     {% endblock content %}
