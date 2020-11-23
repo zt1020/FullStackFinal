@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<script src="/static/sorttable.js"></script>
+<form method="post" action="">
+{% csrf_token %}
+{{form|crispy}}
+<input class="btn btn-primary" type="submit" value="Search" />
+</form>
+
+<table id="example" class="sortable" style="align:left;" cellspacing="20">
+<thead>
+<tr>
+<!-- <th>Student ID</th>
+<th>Internship ID</th> -->
+<th>Course ID</th>
+<th>Student Credits</th>
+<th>semester</th>
+<th>year</th>
+<th>instructor</th>
+<th>start_date</th>
+<th>end_date</th>
+</tr>
+</thead>
+
+
+<tbody>
+{% for internshipassignment_item in internshipassignment_items %}
+<tr class="item">
+<!-- <td>{{internshipassignment_item.studentid}}</td>
+<td>{{internshipassignment_item.internshipid}}</td> -->
+<td>{{internshipassignment_item.course_id}}</td>
+<td>{{internshipassignment_item.student_credits}}</td>
+<td>{{internshipassignment_item.semester}}</td>
+<td>{{internshipassignment_item.year}}</td>
+<td>{{internshipassignment_item.instructor}}</td>
+<td>{{internshipassignment_item.start_date}}</td>
+<td>{{internshipassignment_item.end_date}}</td>
+</tr>
+
+{% endfor %}
+</tbody>
+
+</table>
+
+
+{% endblock content %}
