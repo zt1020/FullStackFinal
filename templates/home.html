@@ -1,44 +1,6 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
-    {% block content %}
-        <script src="/static/sorttable.js"></script>
+{% block content %}
 
-        <form method="post" action="">
-          {% csrf_token %}
-          {{form|crispy}}
-          <input class="btn btn-primary" type="submit" value="Search" />
+<h1><p class="text-primary">Welcome to UNH Internship Portal!!</p></h1>
 
-        <table id="example" class="sortable" style="text-align:center;" cellspacing="30">
-
-            <thead>
-                <tr>
-                    <th>Student ID</th>
-                    <th>unh id</th>
-                    <th>first_name</th>
-                    <th>last_name</th>
-                    <th>school_email</th>
-                    <th>Major</th>
-                    <th>Degree</th>
-                    <th>Linkedin</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                {% for student_item in student_items %}
-                <tr class="item">
-                    <td>{{student_item.pk}}</td>
-                    <td>{{student_item.unh_id}}</td>
-                    <td>{{student_item.first_name}}</td>
-                    <td>{{student_item.last_name}}</td>
-                    <td>{{student_item.school_email}}</td>
-                    <td>{{student_item.major}}</td>
-                    <td>{{student_item.degree}}</td>
-                    <td>{{student_item.linkedin}}</td>
-
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        </form>
-    {% endblock content %}
+{% endblock content %}

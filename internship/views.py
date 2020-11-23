@@ -14,6 +14,7 @@ from internship.models import Student,Internship,InternshipAssignment
 from django.views.generic import ListView
 from .models import Student, InternshipAssignment,Internship
 from .forms import StudentSearchForm
+from .forms import InternshipSearchForm
 
 f_data = Faker()
 
@@ -137,11 +138,23 @@ def display_students(request):
             "student_items" : student_items,
             "form": form
         }
-    return render(request, 'home.html', context)
+    return render(request, 'display_students.html', context)
 
-
-class InternshipAssignmentListView(ListView):
-    model = InternshipAssignment.objects.all()
-
-class InternshipListView(ListView):
-    model = Internship.objects.all()
+def display_internship(request):
+    button = "Internship"
+    internship_items = Internship.objects.all()
+    form = InternshipSearchForm(request.POST or None)
+    context = {
+        'button' : button,
+        'internship_items' : internship_items,
+        'form' : form
+    }
+    if request.method == 'POST':
+        internship_items = Internship.objects.filter(organization_name__icontains=form['organization_name'].value(),
+                                          supervisor_name__icontains=form['supervisor_name'].value()
+                                          )
+        context = {
+            "internship_items" : internship_items,
+            "form": form
+        }
+    return render(request, 'display_internships.html', context)

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<script src="/static/sorttable.js"></script>
+<form method="post" action="">
+{% csrf_token %}
+{{form|crispy}}
+<input class="btn btn-primary" type="submit" value="Search" />
+</form>
+
+<table id="example" class="sortable" style="align:left;" cellspacing="20">
+<thead>
+<tr>
+<th>Internship id</th>
+<th>position</th>
+<th>pay</th>
+<th>organization_name</th>
+<th>organization_url</th>
+<th>organization_address</th>
+<th>supervisor_name</th>
+<th>supervisor_position</th>
+<th>supervisor_email</th>
+<th>supervisor_phone</th>
+</tr>
+</thead>
+
+
+<tbody>
+{% for internship_item in internship_items %}
+<tr class="item">
+<td>{{internship_item.internship_id}}</td>
+<td>{{internship_item.position}}</td>
+<td>{{internship_item.pay}}</td>
+<td>{{internship_item.organization_name}}</td>
+<td>{{internship_item.organization_url}}</td>
+<td>{{internship_item.organization_address}}</td>
+<td>{{internship_item.supervisor_name}}</td>
+<td>{{internship_item.supervisor_position}}</td>
+<td>{{internship_item.supervisor_email}}</td>
+<td>{{internship_item.supervisor_phone}}</td>
+</tr>
+
+{% endfor %}
+</tbody>
+
+</table>
+
+
+{% endblock content %}

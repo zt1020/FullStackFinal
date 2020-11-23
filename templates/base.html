@@ -28,10 +28,15 @@
           <!-- <img src="https://paulcollege.unh.edu/cep/sites/paulcollege.unh.edu.cep/themes/cep/logo.png"> -->
 
        </div>
-       
+
        <li class="nav-item active">
 
          <h3><a class="nav-link text-light" href="{% url 'display_students' %}" role="button"> Student </a><h3>
+
+       </li>
+       <li class="nav-item active">
+
+         <h3><a class="nav-link text-light" href="{% url 'display_internship' %}" role="button"> Internship </a><h3>
 
        </li>
 
@@ -56,10 +61,7 @@
               <h3><a class="nav-link text-light" href="{% url 'home' %}">Sign out</a></h3>
             </li>
 
-
            </div>
-
-
         </div>
       </nav>
 
@@ -68,9 +70,9 @@
     <div class="container">
 
 
-
       {% block content %}
-      <h1><p class="text-primary">Welcome to UNH Internship Portal!!</p></h1>
+
+
       {% endblock content %}
 
     </div> <!-- /container -->
