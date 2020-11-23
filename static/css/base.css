@@ -8,16 +8,17 @@ body {
 }
 
 #content {
-    padding: .2em 1em 1em 1em;
+
     background-color: white;
+
 }
 
 header {
     margin-bottom: 0em;
-    /* display: flex; */
+    display: flex;
     /* background-color: slategrey; */
     margin: 0em;
-    padding: .1em;
+    padding: .5em;
 }
 
 footer {
@@ -27,14 +28,13 @@ footer {
     height: 2em;
     line-height: 2em;
 }
-table tbody { height:450px; overflow-y:scroll; display:block; }
-table thead { display:block; }
+
 table {
-    /* table-layout: auto;
-    width: 100%; */
+    overflow-x: scroll;
+    table-layout: auto;
+    width: 100%;
+    border: 1px solid black;
     border-collapse: collapse;
-    height:100px;
-    /* overflow:auto; */
 }
 
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
@@ -98,13 +98,12 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-.active
-{
+.active {
     /* background-color: blue; */
 }
 
 h3 {
-    /* margin: .5em 0px .5em; */
+    margin: .5em 0px .5em;
 }
 
 a {
