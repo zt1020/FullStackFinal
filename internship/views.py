@@ -151,11 +151,16 @@ def display_internship(request):
     button = "Internship"
     internship_items = Internship.objects.all()
     form = InternshipSearchForm(request.POST or None)
+    organization_name=Internship.objects.all()
+    supervisor_name=Internship.objects.all()
     context = {
         'button' : button,
         'internship_items' : internship_items,
-        'form' : form
+        'form' : form,
+        'organization_name' : organization_name,
+        'supervisor_name' : supervisor_name
     }
+
     if request.method == 'POST':
         internship_items = Internship.objects.filter(organization_name__icontains=form['organization_name'].value(),
                                           supervisor_name__icontains=form['supervisor_name'].value()
