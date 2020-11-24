@@ -22,9 +22,14 @@ class StudentSearchForm(forms.Form):
 
 
 class InternshipSearchForm(forms.ModelForm):
-   class Meta:
-     model = Internship
-     fields = ['organization_name', 'supervisor_name']
+
+    organization_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("organization_name", flat=True).distinct(),empty_label=None)
+    supervisor_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("supervisor_name", flat=True).distinct(),empty_label=None)
+
+
+    class Meta:
+         model = Internship
+         fields = ['organization_name', 'supervisor_name']
 
 
 class InternshipAssignmentSearchForm(forms.ModelForm):
