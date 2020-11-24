@@ -175,10 +175,14 @@ def display_internshipassignment(request):
     button = "Internship Assignment"
     internshipassignment_items = InternshipAssignment.objects.all()
     form = InternshipAssignmentSearchForm(request.POST or None)
+    semester = InternshipAssignment.objects.all()
+    year = InternshipAssignment.objects.all()
     context = {
         'button' : button,
         'internshipassignment_items' : internshipassignment_items,
-        'form' : form
+        'form' : form,
+        'semester' : semester,
+        'year' : year
     }
     if request.method == 'POST':
         internshipassignment_items = InternshipAssignment.objects.filter(semester__icontains=form['semester'].value(),

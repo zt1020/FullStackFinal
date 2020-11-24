@@ -6,8 +6,8 @@ class StudentSearchForm(forms.Form):
 
 
 
-   first_name = forms.ModelChoiceField(queryset=Student.objects.values_list("first_name", flat=True).distinct(),empty_label=None)
-   last_name = forms.ModelChoiceField(queryset=Student.objects.values_list("last_name", flat=True).distinct(),empty_label=None)
+   first_name = forms.ModelChoiceField(queryset=Student.objects.values_list("first_name", flat=True).distinct(),empty_label="--------")
+   last_name = forms.ModelChoiceField(queryset=Student.objects.values_list("last_name", flat=True).distinct(),empty_label="--------")
    #first_name= forms.ModelChoiceField(queryset=Student.objects.values_list("last_name"), flat=empty_label="----", to_field_name="first_name")
    #last_name= forms.ModelChoiceField(queryset=Student.objects.all(), empty_label="----", to_field_name="last_name")
 
@@ -23,8 +23,8 @@ class StudentSearchForm(forms.Form):
 
 class InternshipSearchForm(forms.ModelForm):
 
-    organization_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("organization_name", flat=True).distinct(),empty_label=None)
-    supervisor_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("supervisor_name", flat=True).distinct(),empty_label=None)
+    organization_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("organization_name", flat=True).distinct(),empty_label="--------")
+    supervisor_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("supervisor_name", flat=True).distinct(),empty_label="--------")
 
 
     class Meta:
@@ -33,6 +33,10 @@ class InternshipSearchForm(forms.ModelForm):
 
 
 class InternshipAssignmentSearchForm(forms.ModelForm):
-   class Meta:
-     model = InternshipAssignment
-     fields = ['semester', 'year']
+
+    semester = forms.ModelChoiceField(queryset=InternshipAssignment.objects.values_list("semester", flat=True).distinct(),empty_label="--------")
+    year = forms.ModelChoiceField(queryset=InternshipAssignment.objects.values_list("year", flat=True).distinct(),empty_label="--------")
+
+    class Meta:
+        model = InternshipAssignment
+        fields = ['semester', 'year']
