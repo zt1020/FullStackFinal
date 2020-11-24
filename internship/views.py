@@ -11,7 +11,7 @@ from django.views.generic import TemplateView
 # import xlsxwriter
 from faker import Faker
 from internship.models import Student,Internship,InternshipAssignment
-from django.views.generic import ListView
+# from django.views.generic import ListView
 from .models import Student, InternshipAssignment,Internship
 from .forms import StudentSearchForm
 from .forms import InternshipSearchForm
@@ -123,11 +123,14 @@ class HomepageView(TemplateView):
     template_name = 'home.html'
 
 def display_students(request):
+    """
+    display dropdown fields for first_name and last_name in Student
+    """
     button = "students"
-    student_items = Student.objects.all()
+    student_items = Student.objects.all() # pylint: disable=E1101
     form = StudentSearchForm(request.POST or None)
-    first_name=Student.objects.all()
-    last_name=Student.objects.all()
+    first_name=Student.objects.all() # pylint: disable=E1101
+    last_name=Student.objects.all() # pylint: disable=E1101
     context = {
         'button' : button,
         'student_items' : student_items,
@@ -136,11 +139,10 @@ def display_students(request):
         'last_name':last_name
     }
     if request.method == 'POST':
-        student_items = Student.objects.filter(first_name__icontains=form['first_name'].value(),
-                                            last_name__icontains=form['last_name'].value()
-
-
-                                          )
+        student_items = Student.objects.filter( # pylint: disable=E1101
+            first_name__icontains=form['first_name'].value(),
+            last_name__icontains=form['last_name'].value()
+            )
         context = {
             "student_items" : student_items,
             "form": form
@@ -148,11 +150,15 @@ def display_students(request):
     return render(request, 'display_students.html', context)
 
 def display_internship(request):
+    """
+    display dropdown fields for organization_name and supervisor_name
+    in Internship
+    """
     button = "Internship"
-    internship_items = Internship.objects.all()
+    internship_items = Internship.objects.all() # pylint: disable=E1101
     form = InternshipSearchForm(request.POST or None)
-    organization_name=Internship.objects.all()
-    supervisor_name=Internship.objects.all()
+    organization_name=Internship.objects.all() # pylint: disable=E1101
+    supervisor_name=Internship.objects.all() # pylint: disable=E1101
     context = {
         'button' : button,
         'internship_items' : internship_items,
@@ -162,9 +168,10 @@ def display_internship(request):
     }
 
     if request.method == 'POST':
-        internship_items = Internship.objects.filter(organization_name__icontains=form['organization_name'].value(),
-                                          supervisor_name__icontains=form['supervisor_name'].value()
-                                          )
+        internship_items = Internship.objects.filter( # pylint: disable=E1101
+            organization_name__icontains=form['organization_name'].value(),
+            supervisor_name__icontains=form['supervisor_name'].value()
+            )
         context = {
             "internship_items" : internship_items,
             "form": form
@@ -172,11 +179,15 @@ def display_internship(request):
     return render(request, 'display_internships.html', context)
 
 def display_internshipassignment(request):
+    """
+    display dropdown fields for semester and year
+    in Internship Assignment
+    """
     button = "Internship Assignment"
-    internshipassignment_items = InternshipAssignment.objects.all()
+    internshipassignment_items = InternshipAssignment.objects.all() # pylint: disable=E1101
     form = InternshipAssignmentSearchForm(request.POST or None)
-    semester = InternshipAssignment.objects.all()
-    year = InternshipAssignment.objects.all()
+    semester = InternshipAssignment.objects.all() # pylint: disable=E1101
+    year = InternshipAssignment.objects.all() # pylint: disable=E1101
     context = {
         'button' : button,
         'internshipassignment_items' : internshipassignment_items,
@@ -185,9 +196,10 @@ def display_internshipassignment(request):
         'year' : year
     }
     if request.method == 'POST':
-        internshipassignment_items = InternshipAssignment.objects.filter(semester__icontains=form['semester'].value(),
-                                          year__icontains=form['year'].value()
-                                          )
+        internshipassignment_items = InternshipAssignment.objects.filter( # pylint: disable=E1101 
+            semester__icontains=form['semester'].value(),
+            year__icontains=form['year'].value()
+            )
         context = {
             "internshipassignment_items" : internshipassignment_items,
             "form": form

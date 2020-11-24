@@ -1,42 +1,66 @@
+"""
+forms.py
+Contributors: Snehitha, harshani
+"""
 from django import forms
+# from django.forms import ModelChoiceField
 from .models import Student,Internship,InternshipAssignment
-from django.forms import ModelChoiceField
+
 
 class StudentSearchForm(forms.Form):
+    """
+    dropdown for fields
+    """
+    first_name = forms.ModelChoiceField(queryset=Student.objects.values_list(  # pylint: disable=E1101
+        "first_name", flat=True).distinct(),empty_label="--------")
+    last_name = forms.ModelChoiceField(queryset=Student.objects.values_list(  # pylint: disable=E1101
+        "last_name", flat=True).distinct(),empty_label="--------")
 
-
-
-   first_name = forms.ModelChoiceField(queryset=Student.objects.values_list("first_name", flat=True).distinct(),empty_label="--------")
-   last_name = forms.ModelChoiceField(queryset=Student.objects.values_list("last_name", flat=True).distinct(),empty_label="--------")
-   #first_name= forms.ModelChoiceField(queryset=Student.objects.values_list("last_name"), flat=empty_label="----", to_field_name="first_name")
-   #last_name= forms.ModelChoiceField(queryset=Student.objects.all(), empty_label="----", to_field_name="last_name")
-
-   class Meta:
-     model = Student
-     fields = [
+    class Meta: # pylint: disable=R0903
+        """
+        fields for Student
+        """
+        model = Student
+        fields = [
              "first_name",
              "last_name"
         ]
-     # first_name = forms.ModelChoiceField(queryset = Student.objects.all())
-
 
 
 class InternshipSearchForm(forms.ModelForm):
+    """
+    dropdown for fields
+    """
+    organization_name = forms.ModelChoiceField(
+        queryset=Internship.objects.values_list(  # pylint: disable=E1101
+            "organization_name", flat=True).distinct(),empty_label="--------")
+    supervisor_name = forms.ModelChoiceField(
+        queryset=Internship.objects.values_list(  # pylint: disable=E1101
+            "supervisor_name", flat=True).distinct(),empty_label="--------")
 
-    organization_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("organization_name", flat=True).distinct(),empty_label="--------")
-    supervisor_name = forms.ModelChoiceField(queryset=Internship.objects.values_list("supervisor_name", flat=True).distinct(),empty_label="--------")
 
-
-    class Meta:
-         model = Internship
-         fields = ['organization_name', 'supervisor_name']
+    class Meta: # pylint: disable=R0903
+        """
+        fields for Internship
+        """
+        model = Internship
+        fields = ['organization_name', 'supervisor_name']
 
 
 class InternshipAssignmentSearchForm(forms.ModelForm):
+    """
+    dropdown for fields
+    """
+    semester = forms.ModelChoiceField(
+        queryset=InternshipAssignment.objects.values_list(  # pylint: disable=E1101
+            "semester", flat=True).distinct(),empty_label="--------")
+    year = forms.ModelChoiceField(
+        queryset=InternshipAssignment.objects.values_list(  # pylint: disable=E1101
+            "year", flat=True).distinct(),empty_label="--------")
 
-    semester = forms.ModelChoiceField(queryset=InternshipAssignment.objects.values_list("semester", flat=True).distinct(),empty_label="--------")
-    year = forms.ModelChoiceField(queryset=InternshipAssignment.objects.values_list("year", flat=True).distinct(),empty_label="--------")
-
-    class Meta:
+    class Meta: # pylint: disable=R0903
+        """
+        fields for InternshipAssignment
+        """
         model = InternshipAssignment
         fields = ['semester', 'year']

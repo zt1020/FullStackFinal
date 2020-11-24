@@ -11,12 +11,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 from pathlib import Path
 # import django_heroku
-import os
+# import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = '/home/administrator/comp805/4-snehitha-harshani/static_root/'
-STATICFILES_DIRS = '/home/administrator/comp805/4-snehitha-harshani/static/',
+STATICFILES_DIRS = '/home/administrator/comp805/4-snehitha-harshani/static/', # pylint: disable=R1707
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -88,8 +88,8 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'internship_db',
-    'USER': 'ha1088',
-    'PASSWORD': 'Infy@1234',
+    'USER': 'sm1552',
+    'PASSWORD': 'snehitha',
     'HOST': '127.0.0.1',
     'PORT': '5432',
     }
