@@ -126,14 +126,20 @@ def display_students(request):
     button = "students"
     student_items = Student.objects.all()
     form = StudentSearchForm(request.POST or None)
+    first_name=Student.objects.all()
+    last_name=Student.objects.all()
     context = {
         'button' : button,
         'student_items' : student_items,
-        'form' : form
+        'form' : form,
+        'first_name':first_name,
+        'last_name':last_name
     }
     if request.method == 'POST':
         student_items = Student.objects.filter(first_name__icontains=form['first_name'].value(),
-                                          last_name__icontains=form['last_name'].value()
+                                            last_name__icontains=form['last_name'].value()
+
+
                                           )
         context = {
             "student_items" : student_items,
