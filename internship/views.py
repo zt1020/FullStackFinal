@@ -6,31 +6,31 @@ Updated : 11/16/2020
 
 from openpyxl import load_workbook
 from django.contrib.auth.decorators import login_required
-# from django.http import HttpResponse
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib import messages
 from faker import Faker
+from django.shortcuts import render, redirect  # pylint: disable=C0412
+from django.contrib.auth.forms import AuthenticationForm # pylint: disable=C0412
+from django.contrib.auth import login,logout,authenticate # pylint: disable=C0412
 from internship.models import Student,Internship,InternshipAssignment
-# from django.views.generic import ListView
 from .models import Student, InternshipAssignment,Internship
 from .forms import StudentSearchForm
 from .forms import InternshipSearchForm, CreateUserForm
-from django.shortcuts import render, redirect
 from .forms import InternshipAssignmentSearchForm
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+
 
 def login_request(request):
+    """
+    method for login page
+    """
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not None: # pylint: disable=R1705
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
                 return redirect('/')
@@ -45,20 +45,24 @@ def login_request(request):
 
 
 def logout_request(request):
+    """
+    log out page
+    """
+    logout(request)
+    messages.info(request,"Logged out successfully!")
+    return render(request,"accounts/logout.html")
 
-	logout(request)
-	messages.info(request,"Logged out successfully!")
-	return render(request,"accounts/logout.html")
-
-def registerPage(request):
-
-	form = CreateUserForm()
-	if request.method == "POST":
-		form = CreateUserForm(request.POST)
-		if form.is_valid():
-			form.save()
-	context = {'form' : form}
-	return render(request, 'accounts/register.html', context)
+def register_page(request):
+    """
+    register page
+    """
+    form = CreateUserForm()
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'form' : form}
+    return render(request, 'accounts/register.html', context)
 
 f_data = Faker()
 @login_required(login_url='/register/')
@@ -71,7 +75,7 @@ def import_file(request):
         import_data(file)
     return render(request, 'import.html')
 
-def import_data(LoginRequiredMixin,request):
+def import_data(request):
     """
     loads the workbook and write functions to import the data
     """

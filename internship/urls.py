@@ -5,11 +5,10 @@ updated : 11/16/2020
 """
 from django.urls import path
 # from django.conf.urls import url
-from internship.views import HomepageView,display_students,display_internship,registerPage
+from internship.views import HomepageView,display_students,display_internship,register_page
 from internship.views import display_internshipassignment
 from internship import views
-from django.contrib.auth.decorators import login_required
-# from .views import ListView
+
 
 
 urlpatterns = [
@@ -20,7 +19,7 @@ urlpatterns = [
             name='display_internship'),
         path('display_internshipassignment/', display_internshipassignment,
             name='display_internshipassignment'),
-        path('register/', registerPage, name='register'),
+        path('register/', register_page, name='register'),
         path('logout/', views.logout_request, name='logout'),
         path('login/', views.login_request, name='login')
     ]
