@@ -1,5 +1,4 @@
 asgiref==3.3.0
-astroid @ file:///tmp/build/80754af9/astroid_1592495912941/work
 certifi==2020.6.20
 dj-database-url==0.5.0
 Django==3.1.3
@@ -9,7 +8,6 @@ django-model-utils==4.0.0
 et-xmlfile==1.0.1
 Faker==4.14.2
 gunicorn==20.0.4
-isort @ file:///tmp/build/80754af9/isort_1602603989581/work
 jdcal==1.4.1
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
@@ -23,7 +21,5 @@ pytz==2020.4
 six==1.15.0
 sqlparse==0.4.1
 text-unidecode==1.3
-toml @ file:///tmp/build/80754af9/toml_1592853716807/work
 whitenoise==5.2.0
 wrapt==1.11.2
-XlsxWriter @ file:///tmp/build/80754af9/xlsxwriter_1602692860603/work
