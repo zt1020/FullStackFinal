@@ -3,14 +3,21 @@ forms.py
 Contributors: Snehitha, harshani
 """
 from django import forms
-# from django.forms import ModelChoiceField
-from .models import Student,Internship,InternshipAssignment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Student,Internship,InternshipAssignment
+
 
 class CreateUserForm(UserCreationForm):
+	"""
+	create user form
+	"""
 
-	class Meta:
+
+	class Meta: # pylint: disable=R0903
+		"""
+		fields required to create user form
+		"""
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
 
