@@ -5,10 +5,11 @@ Updated : 11/16/2020
 """
 
 from openpyxl import load_workbook
+from django.contrib.auth.decorators import login_required
 # from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
-# import xlsxwriter
+from django.contrib import messages
 from faker import Faker
 from internship.models import Student,Internship,InternshipAssignment
 # from django.views.generic import ListView
@@ -18,7 +19,36 @@ from .forms import InternshipSearchForm, CreateUserForm
 from django.shortcuts import render, redirect
 from .forms import InternshipAssignmentSearchForm
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in as {username}")
+                return redirect('/')
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request = request,
+                    template_name = "accounts/login.html",
+                    context={"form":form})
+
+
+def logout_request(request):
+
+	logout(request)
+	messages.info(request,"Logged out successfully!")
+	return render(request,"accounts/logout.html")
 
 def registerPage(request):
 
@@ -31,7 +61,7 @@ def registerPage(request):
 	return render(request, 'accounts/register.html', context)
 
 f_data = Faker()
-
+@login_required(login_url='/register/')
 def import_file(request):
     """
     import the file
@@ -41,7 +71,7 @@ def import_file(request):
         import_data(file)
     return render(request, 'import.html')
 
-def import_data(request):
+def import_data(LoginRequiredMixin,request):
     """
     loads the workbook and write functions to import the data
     """
@@ -135,6 +165,7 @@ class HomepageView(TemplateView):
     """
     template_name = 'home.html'
 
+@login_required(login_url='/register/')
 def display_students(request):
     """
     display dropdown fields for first_name and last_name in Student
@@ -161,7 +192,7 @@ def display_students(request):
             "form": form
         }
     return render(request, 'display_students.html', context)
-
+@login_required(login_url='/register/')
 def display_internship(request):
     """
     display dropdown fields for organization_name and supervisor_name
@@ -190,7 +221,7 @@ def display_internship(request):
             "form": form
         }
     return render(request, 'display_internships.html', context)
-
+@login_required(login_url='/register/')
 def display_internshipassignment(request):
     """
     display dropdown fields for semester and year
