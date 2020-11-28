@@ -14,8 +14,21 @@ from internship.models import Student,Internship,InternshipAssignment
 # from django.views.generic import ListView
 from .models import Student, InternshipAssignment,Internship
 from .forms import StudentSearchForm
-from .forms import InternshipSearchForm
+from .forms import InternshipSearchForm, CreateUserForm
+from django.shortcuts import render, redirect
 from .forms import InternshipAssignmentSearchForm
+from django.contrib.auth.forms import UserCreationForm
+
+
+def registerPage(request):
+
+	form = CreateUserForm()
+	if request.method == "POST":
+		form = CreateUserForm(request.POST)
+		if form.is_valid():
+			form.save()
+	context = {'form' : form}
+	return render(request, 'accounts/register.html', context)
 
 f_data = Faker()
 
@@ -196,7 +209,7 @@ def display_internshipassignment(request):
         'year' : year
     }
     if request.method == 'POST':
-        internshipassignment_items = InternshipAssignment.objects.filter( # pylint: disable=E1101 
+        internshipassignment_items = InternshipAssignment.objects.filter( # pylint: disable=E1101
             semester__icontains=form['semester'].value(),
             year__icontains=form['year'].value()
             )
