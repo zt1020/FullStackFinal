@@ -5,6 +5,14 @@ Contributors: Snehitha, harshani
 from django import forms
 # from django.forms import ModelChoiceField
 from .models import Student,Internship,InternshipAssignment
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class CreateUserForm(UserCreationForm):
+
+	class Meta:
+		model = User
+		fields = ['username', 'email', 'password1', 'password2']
 
 
 class StudentSearchForm(forms.Form):
