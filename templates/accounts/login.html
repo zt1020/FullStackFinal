@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br/><br/><br/>
+    <div class="container">
+        <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+            <button style="background-color:palegreen; color:black" class="btn btn-outline-info" type="submit">Login</button>
+        </form>
+        <br/>
+        <div class="mt-4">
+						Don't have an account? <a href="{% url 'register' %}" class="ml-2">Register</a>
+					</div>
+				</div>
+    </div>
+{% endblock %}
