@@ -1,0 +1,20 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main">
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        <br/>
+        <h4>Are you want to delete this item ?<h4>
+        <br>
+
+        <input type="submit" value="Yes" style="background-color:indianred;width:13%" class="nav-link text-light">
+        <br/>
+        <a style="background-color:green; width:13%;" class="nav-link text-light" href="{% url 'display_students' %}" role="button"> Cancel</a>
+
+    </form>
+</div>
+{% endblock %}
