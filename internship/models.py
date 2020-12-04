@@ -14,10 +14,10 @@ class Student(models.Model):
     unh_id = models.CharField("UNH_id", unique = True, blank = False, max_length=15)
     last_name = models.CharField("Last Name", max_length=255, blank = True)
     first_name = models.CharField("First Name", max_length=255, blank = True)
-    school_email = models.EmailField("School Email", max_length=255)
-    major = models.CharField("Major Name", max_length=255)
-    degree = models.CharField("Degree Name", max_length=255)
-    linkedin = models.CharField("LinkedIn Profile", max_length=255)
+    school_email = models.EmailField("School Email", max_length=255,blank = True)
+    major = models.CharField("Major Name", max_length=255,blank = True)
+    degree = models.CharField("Degree Name", max_length=255,blank = True)
+    linkedin = models.CharField("LinkedIn Profile", max_length=255,blank = True)
 
     def __str__(self):
         sid=self.student_id
