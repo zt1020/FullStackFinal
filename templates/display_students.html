@@ -21,6 +21,7 @@
 <th>Degree</th>
 <th>Linkedin</th>
 <th></th>
+<th></th>
 </tr>
 </thead>
 
@@ -37,7 +38,7 @@
 <td>{{student_item.degree}}</td>
 <td>{{student_item.linkedin}}</td>
 <td><a class="btn btn-sm btn-info" href="{% url 'update_student' student_item.pk %}">Update</a></td>
-
+<td><a class="btn btn-sm btn-info" href="{% url 'delete_student' student_item.pk %}">Delete</a></td>
 </tr>
 {% endfor %}
 </tbody>
