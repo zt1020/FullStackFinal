@@ -6,7 +6,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Student,Internship,InternshipAssignment
+from django.db import models
 
+
+class StudentForm(forms.ModelForm):
+	class Meta:
+		model = Student
+		fields = ['last_name','first_name','school_email','major','degree','linkedin']
 
 class CreateUserForm(UserCreationForm):
 	"""
