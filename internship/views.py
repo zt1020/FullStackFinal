@@ -15,11 +15,12 @@ from django.contrib.auth import login,logout,authenticate # pylint: disable=C041
 from internship.models import Student,Internship,InternshipAssignment
 from .models import Student, InternshipAssignment,Internship
 from .forms import StudentSearchForm
-from .forms import InternshipSearchForm, CreateUserForm
-from .forms import InternshipAssignmentSearchForm
+from .forms import InternshipSearchForm,CreateUserForm
+from .forms import InternshipAssignmentSearchForm,StudentForm
+from django.shortcuts import (get_object_or_404,render,HttpResponseRedirect)
+from django.contrib import messages
 
-
-
+f_data = Faker()
 def login_request(request):
     """
     method for login page
@@ -64,7 +65,34 @@ def register_page(request):
     context = {'form' : form}
     return render(request, 'accounts/register.html', context)
 
-f_data = Faker()
+
+
+
+def updateStudent(request,pk):
+     # dictionary for initial data with
+    # field names as keys
+    context ={}
+    # fetch the object related to passed id
+    obj = get_object_or_404(Student, pk = pk)
+
+    print(obj.last_name)
+    # pass the object as instance in form
+    student_form = StudentForm(request.POST or None,instance=obj)
+
+    # save the data from the form and
+    # redirect to detail_view
+
+    if student_form.is_valid():
+        print("-===========================")
+        student_form.save()
+
+        messages.success(request, 'Details updated successfully! Go to Student page to view the updates.')
+
+    # add form dictionary to context
+    context["student_form"] = student_form
+
+    return render(request, "accounts/update_view.html", context)
+
 @login_required(login_url='/register/')
 def import_file(request):
     """
