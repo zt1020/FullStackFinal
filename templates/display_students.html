@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load crispy_forms_tags %}
+
 <script src="/static/sorttable.js"></script>
 <form method="post" action="">
 {% csrf_token %}
@@ -19,6 +20,7 @@
 <th>Major</th>
 <th>Degree</th>
 <th>Linkedin</th>
+<th></th>
 </tr>
 </thead>
 
@@ -34,6 +36,7 @@
 <td>{{student_item.major}}</td>
 <td>{{student_item.degree}}</td>
 <td>{{student_item.linkedin}}</td>
+<td><a class="btn btn-sm btn-info" href="{% url 'update_student' student_item.pk %}">Update</a></td>
 
 </tr>
 {% endfor %}
