@@ -33,12 +33,12 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None: # pylint: disable=R1705
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
+                # messages.info(request, f"You are now logged in as {username}")
                 return redirect('/')
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
+        #     else:
+        #         messages.error(request, "Invalid username or password.")
+        # else:
+        #     messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
                     template_name = "accounts/login.html",
@@ -75,15 +75,11 @@ def updateStudent(request,pk):
     # fetch the object related to passed id
     obj = get_object_or_404(Student, pk = pk)
 
-    print(obj.last_name)
-    # pass the object as instance in form
+
     student_form = StudentForm(request.POST or None,instance=obj)
 
-    # save the data from the form and
-    # redirect to detail_view
-
     if student_form.is_valid():
-        print("-===========================")
+
         student_form.save()
 
         messages.success(request, 'Details updated successfully! Go to Student page to view the updates.')
@@ -92,6 +88,16 @@ def updateStudent(request,pk):
     context["student_form"] = student_form
 
     return render(request, "accounts/update_view.html", context)
+
+
+def deleteStudent(request, pk):
+    context ={}
+    obj = get_object_or_404(Student, pk = pk)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/")
+    return render(request, "accounts/delete_view.html", context)
+
 
 @login_required(login_url='/register/')
 def import_file(request):
