@@ -21,6 +21,16 @@ from django.shortcuts import (get_object_or_404,render,HttpResponseRedirect)
 from django.contrib import messages
 
 f_data = Faker()
+
+def save(self):
+      print("inside save==============")
+      "Get last value of Code and Number from database, and increment before save"
+      studentid = Student.objects.order_by('student_id')
+      unhid = Student.objects.order_by('unh_id')
+      self.studentid = studentid+1
+      self.unhid = unhid + 1
+      super(Student, self).save()
+
 def login_request(request):
     """
     method for login page
@@ -66,13 +76,21 @@ def register_page(request):
     return render(request, 'accounts/register.html', context)
 
 
+def createStudent(request):
+    form = StudentForm()
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            print("=====================")
+            form.save()
+            return redirect('/')
+    return render(request, 'accounts/insert_view.html', {'form':form})
 
 
 def updateStudent(request,pk):
-     # dictionary for initial data with
-    # field names as keys
+     
     context ={}
-    # fetch the object related to passed id
+
     obj = get_object_or_404(Student, pk = pk)
 
 
@@ -83,8 +101,6 @@ def updateStudent(request,pk):
         student_form.save()
 
         messages.success(request, 'Details updated successfully! Go to Student page to view the updates.')
-
-    # add form dictionary to context
     context["student_form"] = student_form
 
     return render(request, "accounts/update_view.html", context)
