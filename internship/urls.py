@@ -6,10 +6,9 @@ updated : 11/16/2020
 from django.urls import path
 # from django.conf.urls import url
 from internship.views import HomepageView,display_students,display_internship,register_page,updateStudent
+from internship.views import createStudent
 from internship.views import display_internshipassignment,deleteStudent
 from internship import views
-
-
 
 urlpatterns = [
         path('', HomepageView.as_view(), name='home'),
@@ -24,5 +23,6 @@ urlpatterns = [
         path('login/', views.login_request, name='login'),
         path('update_student/<int:pk>/', views.updateStudent, name="update_student"),
         path('delete/<int:pk>/', views.deleteStudent, name="delete_student" ),
+        path('create_student/', views.createStudent, name="create_student"),
         # url(r'^user/create$', UserCreateView.as_view(), name='user_create'),
     ]
