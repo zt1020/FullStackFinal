@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 from pathlib import Path
 import django_heroku
-# import os
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,8 +88,8 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'internship_db',
-    'USER': 'sm1552',
-    'PASSWORD': 'snehitha',
+    'USER': 'ha1088',
+    'PASSWORD': 'Infy@1234',
     'HOST': '127.0.0.1',
     'PORT': '5432',
     }
