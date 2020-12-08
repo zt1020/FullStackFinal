@@ -9,6 +9,8 @@
 <input class="btn btn-primary" type="submit" value="Search" />
 </form>
 <br/>
+<h2><a class="btn btn-sm btn-info" href="{% url 'create_internshipassignment'%}">Add New Record</a></h2>
+
 <table id="example" class="sortable" style="align:left;" cellspacing="20">
 <thead>
 <tr>
@@ -21,6 +23,7 @@
 <th>instructor</th>
 <th>start_date</th>
 <th>end_date</th>
+<th></th>
 <th></th>
 </tr>
 </thead>
@@ -39,6 +42,7 @@
 <td>{{internshipassignment_item.start_date}}</td>
 <td>{{internshipassignment_item.end_date}}</td>
 <td><a class="btn btn-sm btn-info" href="{% url 'update_internshipAssignment' internshipassignment_item.pk %}">Update</a></td>
+<td><a class="btn btn-sm btn-info" href="{% url 'delete_internshipassignment' internshipassignment_item.pk %}">Delete</a></td>
 </tr>
 
 {% endfor %}

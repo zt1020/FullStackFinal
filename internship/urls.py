@@ -29,5 +29,7 @@ urlpatterns = [
         path('create_internship/', views.createInternship, name="create_internship"),
 
         path('update_internshipAssignment/<int:pk>/', views.updateInternshipAssignment, name="update_internshipAssignment"),
+        path('delete/<int:pk>/', views.deleteInternshipAssignment, name="delete_internshipassignment" ),
+        path('create_internshipassignment/', views.createInternshipAssignment, name="create_internshipassignment" )
         # url(r'^user/create$', UserCreateView.as_view(), name='user_create'),
     ]
