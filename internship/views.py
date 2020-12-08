@@ -14,8 +14,8 @@ from django.contrib.auth.forms import AuthenticationForm # pylint: disable=C0412
 from django.contrib.auth import login,logout,authenticate # pylint: disable=C0412
 from internship.models import Student,Internship,InternshipAssignment
 from .models import Student, InternshipAssignment,Internship
-from .forms import StudentSearchForm
-from .forms import InternshipSearchForm,CreateUserForm
+from .forms import StudentSearchForm,UpdateInternshipAssignmentForm
+from .forms import InternshipSearchForm,CreateUserForm,UpdateInternshipAssignmentForm
 from .forms import InternshipAssignmentSearchForm,StudentForm
 from django.shortcuts import (get_object_or_404,render,HttpResponseRedirect)
 from django.contrib import messages
@@ -98,6 +98,26 @@ def updateStudent(request,pk):
 
     return render(request, "accounts/update_view.html", context)
 
+def updateInternshipAssignment(request,pk):
+
+    context ={}
+
+    obj = get_object_or_404(InternshipAssignment, pk = pk)
+
+    print("-------------")
+    print(obj.student_credits)
+
+    internshipAssignment_form = UpdateInternshipAssignmentForm(request.POST or None,instance=obj)
+
+    if internshipAssignment_form.is_valid():
+
+        internshipAssignment_form.save()
+
+        messages.success(request, 'Details updated successfully! Go to Internship Assignment page to view the updates.')
+
+    context["internshipAssignment_form"] = internshipAssignment_form
+
+    return render(request, "accounts/update_view_internshipassignment.html", context)
 
 def deleteStudent(request, pk):
     context ={}
