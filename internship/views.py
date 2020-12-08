@@ -98,6 +98,15 @@ def updateStudent(request,pk):
 
     return render(request, "accounts/update_view.html", context)
 
+def createInternship(request):
+    form = InternshipForm()
+    if request.method == 'POST':
+        form = InternshipForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    return render(request, 'accounts/insert_view_internship.html', {'form':form})
+
 def updateInternship(request,pk):
 
     context ={}
@@ -145,6 +154,14 @@ def deleteStudent(request, pk):
         return HttpResponseRedirect("/")
     return render(request, "accounts/delete_view.html", context)
 
+
+def deleteInternship(request, pk):
+    context ={}
+    obj = get_object_or_404(Internship, pk = pk)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/")
+    return render(request, "accounts/delete_view_internship.html", context)
 
 @login_required(login_url='/register/')
 def import_file(request):
