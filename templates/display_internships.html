@@ -10,6 +10,8 @@
 </form>
 
 <br/>
+<h2><a class="btn btn-sm btn-info" href="{% url 'create_internship'%}">Add New Record</a></h2>
+</br>
 <table id="example" class="sortable"  cellspacing="30">
 <thead>
 <tr>
@@ -23,6 +25,8 @@
 <th>supervisor_position</th>
 <th>supervisor_email</th>
 <th>supervisor_phone</th>
+<th></th>
+<th></th>
 </tr>
 </thead>
 
@@ -41,6 +45,7 @@
 <td>{{internship_item.supervisor_email}}</td>
 <td>{{internship_item.supervisor_phone}}</td>
 <td><a class="btn btn-sm btn-info" href="{% url 'update_internship' internship_item.pk %}">Update</a></td>
+<td><a class="btn btn-sm btn-info" href="{% url 'delete_internship' internship_item.pk %}">Delete</a></td>
 </tr>
 
 {% endfor %}
