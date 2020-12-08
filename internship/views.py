@@ -369,3 +369,15 @@ def display_internshipassignment(request):
             "form": form
         }
     return render(request, 'display_internshipassignment.html', context)
+
+
+
+
+def remove_data(request):
+    """
+    Removing the data from all database tables
+    """
+    Student.objects.all().delete() #pylint: disable = no-member
+    InternshipAssignment.objects.all().delete() #pylint: disable = no-member
+    Internship.objects.all().delete() #pylint: disable = no-member
+    return render(request, 'home.html')
