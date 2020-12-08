@@ -24,7 +24,7 @@ class InternshipForm(forms.ModelForm):
 	class Meta:
 		model = Internship
 		fields = ['internship_id','position','pay','organization_name','organization_url', 'organization_address',
-			'supervisor_name', 'supervisor_position', 'supervisor_email', 'supervisor_phone']
+		'supervisor_name', 'supervisor_position', 'supervisor_email', 'supervisor_phone']
 
 class UpdateInternshipAssignmentForm(forms.ModelForm):
 
@@ -33,7 +33,7 @@ class UpdateInternshipAssignmentForm(forms.ModelForm):
 		model = InternshipAssignment
 		# student_id = self.cleaned_data.get('student_id').value()
 		# print(".............................")
-		fields = ['course_id','student_credits','semester','year','instructor','start_date','end_date']
+		fields = ['studentid','internshipid','course_id','student_credits','semester','year','instructor','start_date','end_date']
 
 class CreateUserForm(UserCreationForm):
 	"""
