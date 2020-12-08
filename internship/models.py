@@ -51,7 +51,7 @@ class InternshipAssignment(models.Model):
 
     studentid = models.ForeignKey(
         Student,db_column='student_id',
-        on_delete=models.CASCADE,default=1,null=True
+        on_delete=models.CASCADE,null=True
     )
     internshipid = models.ForeignKey(
         Internship,db_column="internship_id",
