@@ -1,0 +1,32 @@
+
+{%  extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="main">
+    <!-- Create a Form -->
+    <form method="POST"  style="text-align: center;">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+
+        <br/>
+        <!-- form as paragraph -->
+        {{ internshipAssignment_form.as_p }}
+
+        <input type="submit" value="Update" style="background-color:palegreen; color:black">
+
+        {% if messages %}
+          <br/>
+          {% for message in messages %}
+          <br/>
+            {{ message }}
+          {% endfor %}
+        {% endif %}
+
+    </form>
+
+</div>
+
+{% endblock %}
