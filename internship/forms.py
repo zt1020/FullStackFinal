@@ -12,13 +12,14 @@ from django.db import models
 class StudentForm(forms.ModelForm):
 	class Meta:
 		model = Student
-		# student_id = self.cleaned_data.get('student_id').value()
-		# print(".............................")
 		fields = ['student_id','unh_id','last_name','first_name','school_email','major','degree','linkedin']
-		# student_id=Student.objects.latest('student_id')
 
-		# print("---------------")
-		# print(student_id)
+
+class InternshipForm(forms.ModelForm):
+	class Meta:
+		model = Internship
+		fields = ['internship_id','position','pay','organization_name','organization_url', 'organization_address',
+			'supervisor_name', 'supervisor_position', 'supervisor_email', 'supervisor_phone']
 
 
 class CreateUserForm(UserCreationForm):
