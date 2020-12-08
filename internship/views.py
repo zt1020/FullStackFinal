@@ -22,14 +22,7 @@ from django.contrib import messages
 
 f_data = Faker()
 
-def save(self):
-      print("inside save==============")
-      "Get last value of Code and Number from database, and increment before save"
-      studentid = Student.objects.order_by('student_id')
-      unhid = Student.objects.order_by('unh_id')
-      self.studentid = studentid+1
-      self.unhid = unhid + 1
-      super(Student, self).save()
+
 
 def login_request(request):
     """
@@ -88,7 +81,7 @@ def createStudent(request):
 
 
 def updateStudent(request,pk):
-     
+
     context ={}
 
     obj = get_object_or_404(Student, pk = pk)
