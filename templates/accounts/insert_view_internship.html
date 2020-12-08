@@ -1,0 +1,11 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<form method="POST">
+  {{form.as_p}}
+  {% csrf_token %}
+  <input type="submit" value="Insert Record" class = "btn btn-primary btn-lg">
+
+</form>
+{% endblock %}
