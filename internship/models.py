@@ -10,7 +10,7 @@ class Student(models.Model):
     """
     student data model
     """
-    student_id=models.IntegerField(primary_key=True)
+    student_id=models.AutoField(primary_key=True)
     unh_id = models.CharField("UNH_id", unique = True, blank = False, max_length=15)
     last_name = models.CharField("Last Name", max_length=255, blank = True)
     first_name = models.CharField("First Name", max_length=255, blank = True)
@@ -28,7 +28,7 @@ class Internship(models.Model):
     """
     Internship data model
     """
-    internship_id = models.IntegerField(primary_key = True)
+    internship_id = models.AutoField(primary_key = True)
     position = models.CharField("Internship Position", max_length = 50)
     pay = models.CharField("Pay", max_length = 7,null=True)
     organization_name = models.CharField("Organization", max_length = 255)
