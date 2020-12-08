@@ -20,6 +20,14 @@ class StudentForm(forms.ModelForm):
 		# print("---------------")
 		# print(student_id)
 
+class UpdateInternshipAssignmentForm(forms.ModelForm):
+
+	class Meta:
+
+		model = InternshipAssignment
+		# student_id = self.cleaned_data.get('student_id').value()
+		# print(".............................")
+		fields = ['course_id','student_credits','semester','year','instructor','start_date','end_date']
 
 class CreateUserForm(UserCreationForm):
 	"""
