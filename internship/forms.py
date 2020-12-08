@@ -20,6 +20,12 @@ class StudentForm(forms.ModelForm):
 		# print("---------------")
 		# print(student_id)
 
+class InternshipForm(forms.ModelForm):
+	class Meta:
+		model = Internship
+		fields = ['internship_id','position','pay','organization_name','organization_url', 'organization_address',
+			'supervisor_name', 'supervisor_position', 'supervisor_email', 'supervisor_phone']
+
 class UpdateInternshipAssignmentForm(forms.ModelForm):
 
 	class Meta:
