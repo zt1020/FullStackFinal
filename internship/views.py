@@ -16,7 +16,7 @@ from internship.models import Student,Internship,InternshipAssignment
 from .models import Student, InternshipAssignment,Internship
 from .forms import StudentSearchForm
 from .forms import InternshipSearchForm,CreateUserForm
-from .forms import InternshipAssignmentSearchForm,StudentForm
+from .forms import InternshipAssignmentSearchForm,StudentForm,InternshipForm
 from django.shortcuts import (get_object_or_404,render,HttpResponseRedirect)
 from django.contrib import messages
 
@@ -106,6 +106,26 @@ def deleteStudent(request, pk):
         obj.delete()
         return HttpResponseRedirect("/")
     return render(request, "accounts/delete_view.html", context)
+
+def updateInternship(request,pk):
+
+    context ={}
+
+    obj = get_object_or_404(Internship, pk = pk)
+
+
+    internship_form = InternshipForm(request.POST or None,instance=obj)
+
+    if internship_form.is_valid():
+
+        internship_form.save()
+
+        messages.success(request, 'Details updated successfully! Go to Internship page to view the updates.')
+    context["internship_form"] = internship_form
+
+    return render(request, "accounts/update_internship.html", context)
+
+
 
 
 @login_required(login_url='/register/')
