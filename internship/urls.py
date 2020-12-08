@@ -24,5 +24,9 @@ urlpatterns = [
         path('update_student/<int:pk>/', views.updateStudent, name="update_student"),
         path('delete/<int:pk>/', views.deleteStudent, name="delete_student" ),
         path('create_student/', views.createStudent, name="create_student"),
+
+
+
+        path('update_internshipAssignment/<int:pk>/', views.updateInternshipAssignment, name="update_internshipAssignment"),
         # url(r'^user/create$', UserCreateView.as_view(), name='user_create'),
     ]
