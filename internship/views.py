@@ -19,6 +19,8 @@ from .forms import InternshipSearchForm,CreateUserForm,UpdateInternshipAssignmen
 from .forms import InternshipAssignmentSearchForm,StudentForm,InternshipForm
 from django.shortcuts import (get_object_or_404,render,HttpResponseRedirect)
 from django.contrib import messages
+from .roles import unauthenticated_user,allowed_users
+from django.contrib.auth.models import User, Group
 
 f_data = Faker()
 
@@ -56,6 +58,7 @@ def logout_request(request):
     messages.info(request,"Logged out successfully!")
     return render(request,"accounts/logout.html")
 
+
 def register_page(request):
     """
     register page
@@ -64,22 +67,24 @@ def register_page(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            group = form.cleaned_data['group']
+            group = Group.objects.get(name=group)
+            user.groups.add(group)
     context = {'form' : form}
     return render(request, 'accounts/register.html', context)
 
-
+@allowed_users(allowed_roles=['Instructor'])
 def createStudent(request):
     form = StudentForm()
     if request.method == 'POST':
         form = StudentForm(request.POST)
         if form.is_valid():
-            print("=====================")
             form.save()
             return redirect('/')
     return render(request, 'accounts/insert_view.html', {'form':form})
 
-
+@allowed_users(allowed_roles=['Instructor'])
 def updateStudent(request,pk):
 
     context ={}
@@ -98,6 +103,7 @@ def updateStudent(request,pk):
 
     return render(request, "accounts/update_view.html", context)
 
+@allowed_users(allowed_roles=['Instructor'])
 def createInternship(request):
     form = InternshipForm()
     if request.method == 'POST':
@@ -108,7 +114,7 @@ def createInternship(request):
     return render(request, 'accounts/insert_view_internship.html', {'form':form})
 
 
-
+@allowed_users(allowed_roles=['Instructor'])
 def createInternshipAssignment(request):
     form = UpdateInternshipAssignmentForm()
     if request.method == 'POST':
@@ -119,6 +125,7 @@ def createInternshipAssignment(request):
     return render(request, 'accounts/insert_view_internship.html', {'form':form})
 
 
+@allowed_users(allowed_roles=['Instructor'])
 def updateInternship(request,pk):
 
     context ={}
@@ -137,6 +144,7 @@ def updateInternship(request,pk):
 
     return render(request, "accounts/update_view_internship.html", context)
 
+@allowed_users(allowed_roles=['Instructor'])
 def updateInternshipAssignment(request,pk):
 
     context ={}
@@ -155,6 +163,7 @@ def updateInternshipAssignment(request,pk):
 
     return render(request, "accounts/update_view_internshipassignment.html", context)
 
+@allowed_users(allowed_roles=['Instructor'])
 def deleteStudent(request, pk):
     context ={}
     obj = get_object_or_404(Student, pk = pk)
@@ -163,7 +172,7 @@ def deleteStudent(request, pk):
         return HttpResponseRedirect("/")
     return render(request, "accounts/delete_view.html", context)
 
-
+@allowed_users(allowed_roles=['Instructor'])
 def deleteInternship(request, pk):
     context ={}
     obj = get_object_or_404(Internship, pk = pk)
@@ -172,7 +181,7 @@ def deleteInternship(request, pk):
         return HttpResponseRedirect("/")
     return render(request, "accounts/delete_view_internship.html", context)
 
-
+@allowed_users(allowed_roles=['Instructor'])
 def deleteInternshipAssignment(request, pk):
     context ={}
     obj = get_object_or_404(InternshipAssignment, pk = pk)
@@ -182,6 +191,7 @@ def deleteInternshipAssignment(request, pk):
     return render(request, "accounts/delete_view_internshipassignment.html", context)
 
 @login_required(login_url='/register/')
+@allowed_users(allowed_roles=['Instructor'])
 def import_file(request):
     """
     import the file
@@ -190,6 +200,7 @@ def import_file(request):
         file = request.FILES['document']
         import_data(file)
     return render(request, 'import.html')
+
 
 def import_data(request):
     """
@@ -286,6 +297,7 @@ class HomepageView(TemplateView):
     template_name = 'home.html'
 
 @login_required(login_url='/register/')
+@allowed_users(allowed_roles=['Instructor'])
 def display_students(request):
     """
     display dropdown fields for first_name and last_name in Student
@@ -312,7 +324,9 @@ def display_students(request):
             "form": form
         }
     return render(request, 'display_students.html', context)
+
 @login_required(login_url='/register/')
+@allowed_users(allowed_roles=['Instructor'])
 def display_internship(request):
     """
     display dropdown fields for organization_name and supervisor_name
@@ -341,7 +355,9 @@ def display_internship(request):
             "form": form
         }
     return render(request, 'display_internships.html', context)
+
 @login_required(login_url='/register/')
+@allowed_users(allowed_roles=['Instructor'])
 def display_internshipassignment(request):
     """
     display dropdown fields for semester and year
@@ -370,9 +386,7 @@ def display_internshipassignment(request):
         }
     return render(request, 'display_internshipassignment.html', context)
 
-
-
-
+@allowed_users(allowed_roles=['Instructor'])
 def remove_data(request):
     """
     Removing the data from all database tables
