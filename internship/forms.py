@@ -4,7 +4,7 @@ Contributors: Snehitha, harshani
 """
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .models import Student,Internship,InternshipAssignment
 from django.db import models
 
@@ -40,13 +40,13 @@ class CreateUserForm(UserCreationForm):
 	create user form
 	"""
 
-
+	group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
 	class Meta: # pylint: disable=R0903
 		"""
 		fields required to create user form
 		"""
 		model = User
-		fields = ['username', 'email', 'password1', 'password2']
+		fields = ['username', 'email','password1', 'password2', 'group']
 
 
 class StudentSearchForm(forms.Form):
