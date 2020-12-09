@@ -326,7 +326,7 @@ def display_students(request):
     return render(request, 'display_students.html', context)
 
 @login_required(login_url='/register/')
-@allowed_users(allowed_roles=['Instructor'])
+@allowed_users(allowed_roles=['Instructor','Current','Incoming'])
 def display_internship(request):
     """
     display dropdown fields for organization_name and supervisor_name
