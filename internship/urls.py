@@ -11,14 +11,14 @@ from internship.views import display_internshipassignment,deleteStudent,deleteIn
 from internship import views
 
 urlpatterns = [
-        path('', HomepageView.as_view(), name='home'),
+        path('home/', HomepageView.as_view(), name='home'),
         path('import_file/', views.import_file, name='import_file'),
         path('display_students/', display_students, name='display_students'),
         path('display_internship/', display_internship,
             name='display_internship'),
         path('display_internshipassignment/', display_internshipassignment,
             name='display_internshipassignment'),
-        path('register/', register_page, name='register'),
+        path('', register_page, name='register'),
         path('logout/', views.logout_request, name='logout'),
         path('login/', views.login_request, name='login'),
         path('update_student/<int:pk>/', views.updateStudent, name="update_student"),
@@ -34,7 +34,7 @@ urlpatterns = [
         path('remove_data/', remove_data, name='remove_data' ),
 
         path('update_internshipAssignment/<int:pk>/', views.updateInternshipAssignment, name="update_internshipAssignment"),
-        
+
         path('delete_internshipassignment/<int:pk>/', views.deleteInternshipAssignment, name="delete_internshipassignment" ),
 
         path('create_internshipassignment/', views.createInternshipAssignment, name="create_internshipassignment" )
