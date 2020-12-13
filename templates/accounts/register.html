@@ -1,4 +1,3 @@
-{% extends 'base.html' %}
 {% block content %}
 <!DOCTYPE html>
 <html>
@@ -22,7 +21,7 @@ body {
 
 .input-group-append
 {
-  width: 50%;
+  width: 20%;
   padding: 4px;
   margin: 1px 0 15px 0;
   display: inline-block;
@@ -125,6 +124,7 @@ a {
 				{{form.errors}}
 
 				<div class="mt-4">
+          <br/>
 					<div class="d-flex justify-content-center links">
 						Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
 					</div>
