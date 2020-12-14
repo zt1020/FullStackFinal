@@ -39,7 +39,7 @@ def login_request(request):
             if user is not None: # pylint: disable=R1705
                 login(request, user)
                 # messages.info(request, f"You are now logged in as {username}")
-                return redirect('/')
+                return redirect('home')
         #     else:
         #         messages.error(request, "Invalid username or password.")
         # else:
@@ -190,7 +190,7 @@ def deleteInternshipAssignment(request, pk):
         return HttpResponseRedirect("/")
     return render(request, "accounts/delete_view_internshipassignment.html", context)
 
-@login_required(login_url='/register/')
+@login_required(login_url='login')
 @allowed_users(allowed_roles=['Instructor'])
 def import_file(request):
     """
@@ -296,7 +296,7 @@ class HomepageView(TemplateView):
     """
     template_name = 'home.html'
 
-@login_required(login_url='/register/')
+@login_required(login_url='login')
 @allowed_users(allowed_roles=['Instructor'])
 def display_students(request):
     """
@@ -325,7 +325,7 @@ def display_students(request):
         }
     return render(request, 'display_students.html', context)
 
-@login_required(login_url='/register/')
+@login_required(login_url='login')
 @allowed_users(allowed_roles=['Instructor','Current','Incoming'])
 def display_internship(request):
     """
@@ -356,7 +356,7 @@ def display_internship(request):
         }
     return render(request, 'display_internships.html', context)
 
-@login_required(login_url='/register/')
+@login_required(login_url='login')
 @allowed_users(allowed_roles=['Instructor'])
 def display_internshipassignment(request):
     """
