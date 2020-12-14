@@ -1,70 +1,201 @@
 {% block content %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  /* background-color: black; */
-}
-
-* {
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* Add padding to containers */
-.container {
-  padding: 9px;
-  background-color: white;
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.input-group-append
-{
-  width: 20%;
-  padding: 4px;
-  margin: 1px 0 15px 0;
-  display: inline-block;
-  border: none;
-  /* background: #f1f1f1; */
+body {
+  margin: 0;
+  padding: 50px 18px;
+  font-family: sans-serif;
+     background-image: url("https://www.unh.edu/unhtoday/sites/default/files/styles/article_huge/public/article/2016/unh-mag-fall-2014-manchester.jpg?itok=Wwiuq1F6");
+
+   height: 100%;
+
+ /* Center and scale the image nicely */
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
 }
 
-
-/* Overwrite default styles of hr */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Set a style for the submit button */
-.registerbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-.registerbtn:hover {
-  opacity: 1;
-}
-
-/* Add a blue text color to links */
 a {
-  color: dodgerblue;
+  text-decoration: none;
+  color: #3490DC;
 }
-.btn
-{
 
-    background-color: palegreen;
+a:hover {
+  color: #2779BD;
+  text-decoration: underline;
 }
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-  background-color: #f1f1f1;
+
+.container {
+  background-color: white;
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 100px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 10px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.container input[type='radio']
+{
+  display: none;
+}
+
+.container .login,
+.container .register {
+  display: none;
+}
+
+.container .login .title,
+.container .register .title {
   text-align: center;
+  padding: 10p;
+  margin: 10px;
+}
+
+.container .login form label,
+.container .register form label {
+  font-weight: bold;
+  color: #555555;
+}
+
+.container .login form label[for="agreement"],
+.container .register form label[for="agreement"] {
+  font-weight: normal;
+}
+
+.container .login form input[type='email'],
+.container .login form input[type='password'],
+.container .login form input[type='text'],
+.container .login form input[type='date'],
+.container .login form select,
+.container .register form input[type='email'],
+.container .register form input[type='password'],
+.container .register form input[type='text'],
+.container .register form input[type='date'],
+.container .register form select {
+  width: 100%;
+  height: 100px;
+  padding: 0 18px;
+  font-size: 16px;
+  outline: none;
+  border: 10;
+  border-bottom: 10px solid rgba(23, 23, 23, 0.2);
+  /* border: 1px solid rgba(23, 23, 23, 0.2); */
+
+}
+
+.container .login form input[type='email']:focus,
+.container .login form input[type='password']:focus,
+.container .login form input[type='text']:focus,
+.container .login form input[type='date']:focus,
+.container .login form select:focus,
+.container .register form input[type='email']:focus,
+.container .register form input[type='password']:focus,
+.container .register form input[type='text']:focus,
+.container .register form input[type='date']:focus,
+.container .register form select:focus {
+  border-color: rgba(40, 23, 23, 0.7);
+}
+
+.container .login form select,
+.container .login form input[type='date'],
+.container .register form select,
+.container .register form input[type='date'] {
+  border: 1px solid rgba(23, 23, 23, 0.2);
+}
+
+.container .login form [type='submit'],
+.container .register form [type='submit'] {
+  background-color: #2ecc71;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 50px;
+  outline: none;
+  color: #ffffff;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100%;
+  height: 90px;
+  -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.2) inset, 0 2px 2px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px rgba(255, 255, 255, 0.2) inset, 0 2px 2px -1px rgba(0, 0, 0, 0.3);
+}
+
+.container .login form .sing-up,
+.container .register form .sing-up {
+  background-color: #3490DC;
+}
+
+.container .login form .input-control,
+.container .register form .input-control {
+  margin-bottom: 10px;
+}
+
+.container .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.container .footer label span {
+  display: inline-block;
+  font-size: 14px;
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 3px solid #3490DC;
+  padding: 7px 10px;
+  color: #555555;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 2px 30px 30px 2px;
+}
+
+.container .footer label span:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+  border-left-color: #3490DC;
+  background: #F8FAFC;
+  color: #222222;
+  -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.2) inset, 0 2px 2px -1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px rgba(255, 255, 255, 0.2) inset, 0 2px 2px -1px rgba(0, 0, 0, 0.3);
+}
+
+.container .footer label .sign-in {
+  border-left: 3px solid #2ecc71 !important;
+}
+
+.container .reg-radio:checked~.register {
+  display: block;
+}
+
+.container .login-radio:checked~.login {
+  display: block;
 }
 </style>
 </head>
@@ -72,8 +203,10 @@ a {
 <div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
+        <!-- <br/>
+        <br/> -->
 				<div class="d-flex justify-content-center">
-					<h4 id="form-title">REGISTER ACCOUNT</h4>
+					<h2 id="form-title">REGISTER ACCOUNT</h4>
 				</div>
         <br/>
 				<div class="d-flex justify-content-center form_container">
@@ -85,37 +218,53 @@ a {
 
 							<label for="username"><b>User Name</b></label>
 							</div>
+                <br/>
 							{{form.username}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
+              <br/>
 							<label for="email"><b>Email</b></label>
 							</div>
+              <br/>
 							{{form.email}}
 						</div>
+              <br/>
             <div class="input-group mb-2">
 							<div class="input-group-append">
-              <label for="group"><b>Group</b></label>
+              <label for="group"><b>Role</b></label>
 							</div>
+                <br/>
 							{{form.group}}
+
 						</div>
+              <br/>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
               <label for="password1"><b>Password</b></label>
+
 							</div>
+                <br/>
 							{{form.password1}}
+
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
+                <br/>
               <label for="password2"><b>Confirm Password</b></label>
+
 							</div>
+                <br/>
 							{{form.password2}}
 						</div>
 
 
-
+                <br/>
 				   		<div class="d-flex justify-content-center mt-3 login_container">
-				 			<input class="btn login_btn" type="submit" value="Register Account">
+				 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input style="background-color:palegreen" class="btn login_btn" type="submit"
+              value="Register Account">
+                <br/>
 				   		</div>
 
 					</form>
@@ -125,8 +274,9 @@ a {
 
 				<div class="mt-4">
           <br/>
+
 					<div class="d-flex justify-content-center links">
-						Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
+						&nbsp;&nbsp;Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
 					</div>
 				</div>
 			</div>
