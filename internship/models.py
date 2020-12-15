@@ -29,15 +29,15 @@ class Internship(models.Model):
     Internship data model
     """
     internship_id = models.AutoField(primary_key = True)
-    position = models.CharField("Internship Position", max_length = 50,null=True)
-    pay = models.CharField("Pay", max_length = 7,null=True)
+    position = models.CharField("Internship Position", max_length = 255,null=True)
+    pay = models.CharField("Pay", max_length = 255,null=True)
     organization_name = models.CharField("Organization", max_length = 255,null=True)
     organization_url = models.CharField("URL", max_length = 255,null=True)
     organization_address = models.CharField("Mailing Address",max_length = 255,null=True)
     supervisor_name = models.CharField("Supervisor Name", max_length = 255,null=True)
     supervisor_position = models.CharField("Supervisor Position" ,max_length = 255,null=True)
     supervisor_email = models.CharField("Supervisor Email", max_length = 255,null=True)
-    supervisor_phone = models.CharField("Supervisor Phone", max_length = 100,null=True)
+    supervisor_phone = models.CharField("Supervisor Phone", max_length = 255,null=True)
 
     def __str__(self):
         iid=self.internship_id
@@ -63,9 +63,9 @@ class InternshipAssignment(models.Model):
     student_credits = models.CharField(
         "student credits", max_length = 10, default = 3, null=True
     )
-    semester = models.CharField("Semester", max_length = 30)
-    year = models.CharField("Year", max_length = 10)
-    instructor = models.CharField("Instructor", max_length = 40)
+    semester = models.CharField("Semester", max_length = 30, null=True)
+    year = models.CharField("Year", max_length = 10, null=True)
+    instructor = models.CharField("Instructor", max_length = 40, null=True)
     start_date = models.DateField("Start Date")
     end_date = models.DateField("End Date")
 
