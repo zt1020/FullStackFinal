@@ -247,7 +247,7 @@ def import_student(sheet):
     """
     importing student and generating fake data
     """
-    for i in range(2, 10):
+    for i in range(2, sheet.max_row+1):
         student_id=str(i-1)
         unh_id=str(i-1)
         last_name=f_data.last_name()
@@ -269,7 +269,7 @@ def import_internship(sheet):
     """
     importing internship and generating fake data
     """
-    for i in range(2, 10):
+    for i in range(2, sheet.max_row+1):
 
         internship_id=str(i-1)
         position=sheet['N'+str(i)].value
@@ -301,7 +301,7 @@ def import_internshipassignment(sheet):
     """
     importing InternshipAssignment and generating fake data
     """
-    for i in range(2, 10):
+    for i in range(2, sheet.max_row+1):
 
         course_id=sheet['I'+str(i)].value
         student_credits=sheet['J'+str(i)].value

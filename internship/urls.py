@@ -5,9 +5,10 @@ updated : 11/16/2020
 """
 from django.urls import path
 from internship import views
+from internship.views import HomepageView
 
 urlpatterns = [
-        path('home/', views.HomepageView, name='home'),
+        path('home/', HomepageView.as_view(), name='home'),
         path('import_file/', views.import_file, name='import_file'),
         path('display_students/', views.display_students, name='display_students'),
         path('display_internship/', views.display_internship,
