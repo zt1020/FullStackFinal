@@ -9,18 +9,18 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.contrib import messages
 from faker import Faker
-from django.shortcuts import render, redirect  # pylint: disable=C0412
+from django.shortcuts import redirect  # pylint: disable=C0412
 from django.contrib.auth.forms import AuthenticationForm # pylint: disable=C0412
 from django.contrib.auth import login,logout,authenticate # pylint: disable=C0412
+from django.contrib.auth.models import User, Group # pylint: disable=C0412
+from django.shortcuts import (get_object_or_404,render,HttpResponseRedirect)
 from internship.models import Student,Internship,InternshipAssignment
 from .models import Student, InternshipAssignment,Internship
 from .forms import StudentSearchForm,UpdateInternshipAssignmentForm
-from .forms import InternshipSearchForm,CreateUserForm,UpdateInternshipAssignmentForm
+from .forms import InternshipSearchForm,CreateUserForm
 from .forms import InternshipAssignmentSearchForm,StudentForm,InternshipForm
-from django.shortcuts import (get_object_or_404,render,HttpResponseRedirect)
-from django.contrib import messages
-from .roles import unauthenticated_user,allowed_users
-from django.contrib.auth.models import User, Group
+from .roles import allowed_users
+
 
 f_data = Faker()
 
@@ -75,7 +75,10 @@ def register_page(request):
     return render(request, 'accounts/register.html', context)
 
 @allowed_users(allowed_roles=['Instructor'])
-def createStudent(request):
+def create_student(request):
+    """
+    create students
+    """
     form = StudentForm()
     if request.method == 'POST':
         form = StudentForm(request.POST)
@@ -85,8 +88,10 @@ def createStudent(request):
     return render(request, 'accounts/insert_view.html', {'form':form})
 
 @allowed_users(allowed_roles=['Instructor'])
-def updateStudent(request,pk):
-
+def update_student(request,pk):
+    """
+    update student
+    """
     context ={}
 
     obj = get_object_or_404(Student, pk = pk)
@@ -98,36 +103,47 @@ def updateStudent(request,pk):
 
         student_form.save()
 
-        messages.success(request, 'Details updated successfully! Go to Student page to view the updates.')
+        messages.success(request, 'Details updated successfully! \
+            Go to Student page to view the updates.')
     context["student_form"] = student_form
 
     return render(request, "accounts/update_view.html", context)
 
 @allowed_users(allowed_roles=['Instructor'])
-def createInternship(request):
+def create_internship(request):
+    """
+    create internship
+    """
     form = InternshipForm()
     if request.method == 'POST':
         form = InternshipForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
-    return render(request, 'accounts/insert_view_internship.html', {'form':form})
+    return render(request, 'accounts/insert_view_internship.html',
+                  {'form':form})
 
 
 @allowed_users(allowed_roles=['Instructor'])
-def createInternshipAssignment(request):
+def create_internshipassignment(request):
+    """
+    create internship Assignment
+    """
     form = UpdateInternshipAssignmentForm()
     if request.method == 'POST':
         form = UpdateInternshipAssignmentForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
-    return render(request, 'accounts/insert_view_internship.html', {'form':form})
+    return render(request, 'accounts/insert_view_internship.html',
+                  {'form':form})
 
 
 @allowed_users(allowed_roles=['Instructor'])
-def updateInternship(request,pk):
-
+def update_internship(request,pk):
+    """
+    update internship
+    """
     context ={}
 
     obj = get_object_or_404(Internship, pk = pk)
@@ -139,14 +155,17 @@ def updateInternship(request,pk):
 
         internship_form.save()
 
-        messages.success(request, 'Details updated successfully! Go to Internship page to view the updates.')
+        messages.success(request, 'Details updated successfully! \
+            Go to Internship page to view the updates.')
     context["internship_form"] = internship_form
 
     return render(request, "accounts/update_view_internship.html", context)
 
 @allowed_users(allowed_roles=['Instructor'])
-def updateInternshipAssignment(request,pk):
-
+def update_internshipassignment(request,pk):
+    """
+    update internship Assignment
+    """
     context ={}
 
     obj = get_object_or_404(InternshipAssignment, pk = pk)
@@ -157,14 +176,19 @@ def updateInternshipAssignment(request,pk):
 
         internshipAssignment_form.save()
 
-        messages.success(request, 'Details updated successfully! Go to Internship Assignment page to view the updates.')
+        messages.success(request, 'Details updated successfully! \
+            Go to Internship Assignment page to view the updates.')
 
     context["internshipAssignment_form"] = internshipAssignment_form
 
-    return render(request, "accounts/update_view_internshipassignment.html", context)
+    return render(request, "accounts/update_view_internshipassignment.html",
+                  context)
 
 @allowed_users(allowed_roles=['Instructor'])
-def deleteStudent(request, pk):
+def delete_student(request, pk):
+    """
+    delete student
+    """
     context ={}
     obj = get_object_or_404(Student, pk = pk)
     if request.method =="POST":
@@ -173,7 +197,10 @@ def deleteStudent(request, pk):
     return render(request, "accounts/delete_view.html", context)
 
 @allowed_users(allowed_roles=['Instructor'])
-def deleteInternship(request, pk):
+def delete_internship(request, pk):
+    """
+    delete internship
+    """
     context ={}
     obj = get_object_or_404(Internship, pk = pk)
     if request.method =="POST":
@@ -182,13 +209,17 @@ def deleteInternship(request, pk):
     return render(request, "accounts/delete_view_internship.html", context)
 
 @allowed_users(allowed_roles=['Instructor'])
-def deleteInternshipAssignment(request, pk):
+def delete_internshipassignment(request, pk):
+    """
+    delete internship Assignment
+    """
     context ={}
     obj = get_object_or_404(InternshipAssignment, pk = pk)
     if request.method =="POST":
         obj.delete()
         return HttpResponseRedirect("/")
-    return render(request, "accounts/delete_view_internshipassignment.html", context)
+    return render(request, "accounts/delete_view_internshipassignment.html",
+                  context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Instructor'])

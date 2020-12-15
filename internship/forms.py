@@ -3,44 +3,57 @@ forms.py
 Contributors: Snehitha, harshani
 """
 from django import forms
+# from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
-from .models import Student,Internship,InternshipAssignment
-from django.db import models
+from .models import Student, Internship, InternshipAssignment
+
 
 
 class StudentForm(forms.ModelForm):
-	class Meta:
+	"""
+	Student form
+	"""
+	class Meta: # pylint: disable=R0903
+		"""
+		fields for student form
+		"""
 		model = Student
-		fields = ['student_id','unh_id','last_name','first_name','school_email','major','degree','linkedin']
+		fields = ['student_id','unh_id','last_name','first_name',
+			'school_email','major','degree','linkedin']
 
 
 class InternshipForm(forms.ModelForm):
-	class Meta:
+	"""
+	Internship form
+	"""
+	class Meta: # pylint: disable=R0903
+		"""
+		fields for intership form
+		"""
 		model = Internship
-		fields = ['internship_id','position','pay','organization_name','organization_url', 'organization_address',
-			'supervisor_name', 'supervisor_position', 'supervisor_email', 'supervisor_phone']
+		fields = ['internship_id','position','pay','organization_name',
+				  'organization_url', 'organization_address',
+				  'supervisor_name', 'supervisor_position', 'supervisor_email',
+				  'supervisor_phone']
 
-class InternshipForm(forms.ModelForm):
-	class Meta:
-		model = Internship
-		fields = ['internship_id','position','pay','organization_name','organization_url', 'organization_address',
-		'supervisor_name', 'supervisor_position', 'supervisor_email', 'supervisor_phone']
 
 class UpdateInternshipAssignmentForm(forms.ModelForm):
-
-	class Meta:
-
+	"""
+	InternshipAssignment form
+	"""
+	class Meta: # pylint: disable=R0903
+		"""
+		fields for InternshipAssignment form
+		"""
 		model = InternshipAssignment
-		# student_id = self.cleaned_data.get('student_id').value()
-		# print(".............................")
-		fields = ['studentid','internshipid','course_id','student_credits','semester','year','instructor','start_date','end_date']
+		fields = ['studentid','internshipid','course_id','student_credits',
+				  'semester','year','instructor','start_date','end_date']
 
 class CreateUserForm(UserCreationForm):
 	"""
 	create user form
 	"""
-
 	group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
 	class Meta: # pylint: disable=R0903
 		"""
