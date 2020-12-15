@@ -12,12 +12,12 @@ class Student(models.Model):
     """
     student_id=models.AutoField(primary_key=True)
     unh_id = models.CharField("UNH_id", unique = True, blank = False, max_length=15)
-    last_name = models.CharField("Last Name", max_length=255, blank = True)
-    first_name = models.CharField("First Name", max_length=255, blank = True)
-    school_email = models.EmailField("School Email", max_length=255,blank = True)
+    last_name = models.CharField("Last Name", max_length=255, null = True)
+    first_name = models.CharField("First Name", max_length=255, null = True)
+    school_email = models.EmailField("School Email", max_length=255,null = True)
     major = models.CharField("Major Name", max_length=255,null=True)
-    degree = models.CharField("Degree Name", max_length=255,blank = True)
-    linkedin = models.CharField("LinkedIn Profile", max_length=255,blank = True)
+    degree = models.CharField("Degree Name", max_length=255,null = True)
+    linkedin = models.CharField("LinkedIn Profile", max_length=255,null = True)
 
     def __str__(self):
         sid=self.student_id
