@@ -29,12 +29,12 @@ class Internship(models.Model):
     Internship data model
     """
     internship_id = models.AutoField(primary_key = True)
-    position = models.CharField("Internship Position", max_length = 50)
+    position = models.CharField("Internship Position", max_length = 50,null=True)
     pay = models.CharField("Pay", max_length = 7,null=True)
-    organization_name = models.CharField("Organization", max_length = 255)
+    organization_name = models.CharField("Organization", max_length = 255,null=True)
     organization_url = models.CharField("URL", max_length = 255,null=True)
-    organization_address = models.CharField("Mailing Address",max_length = 255)
-    supervisor_name = models.CharField("Supervisor Name", max_length = 255)
+    organization_address = models.CharField("Mailing Address",max_length = 255,null=True)
+    supervisor_name = models.CharField("Supervisor Name", max_length = 255,null=True)
     supervisor_position = models.CharField("Supervisor Position" ,max_length = 255,null=True)
     supervisor_email = models.CharField("Supervisor Email", max_length = 255,null=True)
     supervisor_phone = models.CharField("Supervisor Phone", max_length = 100,null=True)
