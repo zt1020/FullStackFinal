@@ -54,7 +54,7 @@ class CreateUserForm(UserCreationForm):
 	"""
 	create user form
 	"""
-	group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
+	group = forms.ModelChoiceField(queryset=Group.objects.all().exclude(name="Instructor"), required=True)
 	class Meta: # pylint: disable=R0903
 		"""
 		fields required to create user form
