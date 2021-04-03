@@ -20,6 +20,7 @@ from .forms import StudentSearchForm,UpdateInternshipAssignmentForm
 from .forms import InternshipSearchForm,CreateUserForm
 from .forms import InternshipAssignmentSearchForm,StudentForm,InternshipForm
 from .roles import allowed_users
+from django.contrib import messages
 
 
 f_data = Faker()
@@ -228,8 +229,11 @@ def import_file(request):
     import the file
     """
     if request.method=='POST':
-        file = request.FILES['document']
-        import_data(file)
+        try:
+            file = request.FILES['document']
+            import_data(file)
+        except KeyError:
+            messages.info(request, 'No file selected')
     return render(request, 'import.html')
 
 
