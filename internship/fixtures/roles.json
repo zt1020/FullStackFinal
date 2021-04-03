@@ -3,14 +3,16 @@
     "model": "auth.group",
     "pk": 1,
     "fields": {
-      "name": "Current"
+      "name": "Current",
+      "permissions": [ 28,32]
       }
   },
   {
     "model": "auth.group",
     "pk": 2,
     "fields": {
-      "name": "Incoming"
+      "name": "Incoming",
+      "permissions": [12]
 
     }
   },
@@ -18,7 +20,45 @@
     "model": "auth.group",
     "pk": 3,
     "fields": {
-      "name": "Instructor"
+      "name": "Instructor",
+      "permissions":
+      [1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11,
+        12,
+        5,
+        6,
+        7,
+        8,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        25,
+        26,
+        27,
+        28,
+        33,
+        34,
+        35,
+        36,
+        29,
+        30,
+        31,
+        32,
+        21,
+        22,
+        23,
+        24
+      ]
 
     }
   }

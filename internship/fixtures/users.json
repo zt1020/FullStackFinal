@@ -5,6 +5,7 @@
     "fields": {
       "first_name": "User",
       "last_name":"one",
-      "groups": [3]
+      "groups": [3],
+      
       }
   }]
