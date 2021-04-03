@@ -1,24 +1,24 @@
 [
   {
-    "model": "internship.roles",
+    "model": "auth.group",
     "pk": 1,
     "fields": {
-      "role_name": "Current"
+      "name": "Current"
       }
   },
   {
-    "model": "internship.roles",
+    "model": "auth.group",
     "pk": 2,
     "fields": {
-      "role_name": "Incoming"
+      "name": "Incoming"
 
     }
   },
   {
-    "model": "internship.roles",
+    "model": "auth.group",
     "pk": 3,
     "fields": {
-      "role_name": "Instructor"
+      "name": "Instructor"
 
     }
   }
