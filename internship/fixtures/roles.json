@@ -1,0 +1,25 @@
+[
+  {
+    "model": "internship.roles",
+    "pk": 1,
+    "fields": {
+      "role_name": "Current"
+      }
+  },
+  {
+    "model": "internship.roles",
+    "pk": 2,
+    "fields": {
+      "role_name": "Incoming"
+
+    }
+  },
+  {
+    "model": "internship.roles",
+    "pk": 3,
+    "fields": {
+      "role_name": "Instructor"
+
+    }
+  }
+]
