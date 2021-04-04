@@ -1,7 +1,7 @@
 """
 urls.py
-Contributors: Snehitha, harshani
-updated : 11/16/2020
+Contributors: Purnya, Zachary
+updated : 04/03/2021
 """
 from django.urls import path
 from internship import views
