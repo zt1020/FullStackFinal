@@ -13,7 +13,6 @@ import django_heroku
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = '/home/administrator/comp805/4-snehitha-harshani/static_root/'
 STATICFILES_DIRS = '/home/administrator/comp805/4-snehitha-harshani/static/', # pylint: disable=R1707
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
