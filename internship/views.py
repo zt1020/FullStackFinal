@@ -231,6 +231,7 @@ def import_file(request):
     if request.method=='POST':
         try:
             file = request.FILES['document']
+            messages.success(request, 'Form submission successful')
             import_data(file)
         except KeyError:
             messages.info(request, 'No file selected')
