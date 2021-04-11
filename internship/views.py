@@ -43,12 +43,12 @@ def login_request(request):
                 return redirect('home')
         #     else:
         #         messages.error(request, "Invalid username or password.")
-        # else:
-        #     messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request = request,
-                    template_name = "accounts/login.html",
-                    context={"form":form})
+        #else:
+            #messages.error(request, "Invalid username or password.")
+    #form = AuthenticationForm()
+    if form.is_valid() == False:
+        messages.error(request, "Invalid username or password.")
+        return render(request = request,template_name = "accounts/login.html",context={"form":form})
 
 
 def logout_request(request):
