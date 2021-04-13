@@ -1,9 +1,10 @@
 """
 urls.py
 Contributors: Purnya, Zachary
-updated : 04/03/2021
+updated : 04/011/2021
 """
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from internship import views
 from internship.views import HomepageView
 
@@ -40,6 +41,16 @@ urlpatterns = [
 
         path('create_internshipassignment/',
             views.create_internshipassignment,
-            name="create_internshipassignment" )
+            name="create_internshipassignment" ),
         # url(r'^user/create$', UserCreateView.as_view(), name='user_create'),
+        path('reset_password/', auth_views.PasswordResetView.as_view(template_name="reset_password.html"),
+            name='reset_password'),
+        path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="password_reset_sent.html"),
+            name='password_reset_done'),
+        path('reset/<uidb64>/<token>',
+            auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_form.html"),
+            name='password_reset_confirm'),
+        path('reset_password_complete/',
+            auth_views.PasswordResetCompleteView.as_view(template_name="password_reset_done.html"),
+            name='password_reset_complete')
     ]
