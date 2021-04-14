@@ -11,7 +11,16 @@ div {
 
 
     <br/><br/><br/><br/>
-    <br/><br/><br/><br/>
+
+    {% for message in messages %}
+      <div class="alert alert-success">
+          <a class="close" href="#" data-dismiss="alert">×</a>
+
+          {{ message }}
+
+      </div>
+      {% endfor %}
+  <br/><br/><br/><br/>
     <div class="container">
         <form method="POST">
         {% csrf_token %}
