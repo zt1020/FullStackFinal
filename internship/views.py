@@ -48,7 +48,7 @@ def login_request(request):
     #form = AuthenticationForm()
         if form.is_valid() == False:
             messages.error(request, "Invalid username or password.")
-    return render(request = request,template_name = "accounts/login.html",context={"form":form})
+        return render(request = request,template_name = "accounts/login.html",context={"form":form})
 
 
 def logout_request(request):
