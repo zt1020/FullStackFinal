@@ -48,8 +48,9 @@
 
               <h3> <p class="nav-link text-light" >{{user.username}}</p></h3>
 
-            <h3><a class="nav-link text-light" href="{% url 'logout' %}">Log out</a></h3>
-
+              {% if request.user.is_authenticated %}
+              <h3><a class="nav-link text-light" href="{% url 'logout' %}">Log out</a></h3>
+              {% endif %}
               <h3><a class="nav-link text-light" href="{% url 'remove_data' %}" onclick="return confirm('Are you sure to remove data?')">Remove data</a></h3>
 
            </div>
