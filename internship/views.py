@@ -21,6 +21,7 @@ from .forms import InternshipSearchForm, CreateUserForm
 from .forms import InternshipAssignmentSearchForm, StudentForm, InternshipForm
 from .roles import allowed_users
 from django.contrib import messages
+from django.utils.decorators import method_decorator
 
 f_data = Faker()
 
@@ -332,6 +333,10 @@ class HomepageView(TemplateView):
     This creates class based HomepageView
     """
     template_name = 'home.html'
+
+    @method_decorator(login_required(login_url='login'))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 @login_required(login_url='login')
