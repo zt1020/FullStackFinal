@@ -108,3 +108,8 @@ a {
     color: white;
     text-decoration: none;
 }
+
+/*hide role-specific div html*/
+div.anonymous, div.end_user, div.agent, div.manager {
+display: none;
+}

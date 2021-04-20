@@ -54,7 +54,7 @@ def logout_request(request):
     log out page
     """
     logout(request)
-    messages.info(request, "Logged out successfully!")
+    #messages.info(request, "Logged out successfully!")
     return render(request, "accounts/logout.html")
 
 
