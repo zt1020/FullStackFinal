@@ -6,12 +6,12 @@
 
 {% block content %}
 <br/>
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+<p>{% trans 'Are you sure you want to log out?' %}</p>
 
 <form method="post" action="{% url 'logout' %}">
   {% csrf_token %}
 
-<h3><a style="background-color:red; width:16%;" class="nav-link text-light" href="{% url 'home' %}" role="button"> sign out</a><h3>
+<h3><a style="background-color:red; width:20%;" class="nav-link text-light" href="{% url 'home' %}" role="button"> Logout</a><h3>
 </form>
 
 {% endblock %}
