@@ -9,6 +9,7 @@ from internship import views
 from internship.views import HomepageView
 
 urlpatterns = [
+        path('',  views.login_request, name='login'),
         path('home/', HomepageView.as_view(), name='home'),
         path('import_file/', views.import_file, name='import_file'),
         path('display_students/', views.display_students, name='display_students'),
@@ -16,7 +17,7 @@ urlpatterns = [
             name='display_internship'),
         path('display_internshipassignment/', views.display_internshipassignment,
             name='display_internshipassignment'),
-        path('', views.register_page, name='register'),
+        path('register/', views.register_page, name='register'),
         path('logout/', views.logout_request, name='logout'),
         path('login/', views.login_request, name='login'),
         path('update_student/<int:pk>/', views.update_student, name="update_student"),
