@@ -4,6 +4,7 @@ Contributors: Zachary, Purnya
 Updated : 04/03/2021
 """
 import pandas as pd
+import datetime
 from openpyxl import *
 from random import randint
 from django.contrib.auth.decorators import login_required
@@ -261,14 +262,7 @@ def import_data(request):
             d['Row Count'] = rowCount
             import_student_csv(d)
             import_internship_csv(d)
-
-
-
-        # for index, row in df.iterrows():
-        #     rowCount = index
-        #     d = row.to_dict()
-        #     d['Row Count'] = rowCount
-        #     import_internship_csv(d)
+            import_internshipassignment_csv(d)
 
 
 def import_student_csv(dt):
@@ -368,6 +362,25 @@ def import_internship(sheet):
         )
         import_i.save()
 
+def import_internshipassignment_csv(dt):
+    course_id = dt['Course ID']
+    student_credits = dt['Credits']
+    semester = dt['Semester\xa0']
+    year = dt['Year']
+    instructor = dt['Instructor']
+    start_date = f_data.date()
+    end_date = f_data.date()
+
+
+
+    import_ia = InternshipAssignment(
+        course_id=course_id, student_credits=student_credits,
+        semester=semester,
+        year=year,
+        instructor=instructor,
+        start_date=start_date, end_date=end_date
+    )
+    import_ia.save()
 
 def import_internshipassignment(sheet):
     """
