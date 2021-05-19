@@ -3,8 +3,10 @@ views.py
 Contributors: Zachary, Purnya
 Updated : 04/03/2021
 """
-
-from openpyxl import load_workbook
+import pandas as pd
+import datetime
+from openpyxl import *
+from random import randint
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.contrib import messages
@@ -22,6 +24,7 @@ from .forms import InternshipAssignmentSearchForm, StudentForm, InternshipForm
 from .roles import allowed_users
 from django.contrib import messages
 from django.utils.decorators import method_decorator
+
 
 f_data = Faker()
 
@@ -244,12 +247,41 @@ def import_data(request):
     """
     loads the workbook and write functions to import the data
     """
-    work_book = load_workbook(filename=request, data_only=True)
-    sheet = work_book['sample-internship-data']
-    import_student(sheet)
-    import_internship(sheet)
-    import_internshipassignment(sheet)
+    if request.name.endswith(".xlsx"):
+        work_book = load_workbook(filename=request, data_only=True, )
+        sheet = work_book['sample-internship-data']
+        import_student(sheet)
+        import_internship(sheet)
+        import_internshipassignment(sheet)
 
+    elif request.name.endswith(".csv"):
+        df = pd.read_csv(request)
+        for index, row in df.iterrows():
+            rowCount = index
+            d = row.to_dict()
+            d['Row Count'] = rowCount
+            import_student_csv(d)
+            import_internship_csv(d)
+            import_internshipassignment_csv(d)
+
+
+def import_student_csv(dt):
+
+    student_id = str(dt['Row Count'])
+    unh_id = student_id
+    last_name = dt['Last Name']
+    first_name = dt['First Name']
+    major = dt['Major Name']
+    school_email = dt['School Email']
+    degree = dt['Degree Name']
+    linkedin = dt['LinkedIn Profile']
+    import_s = Student(
+        student_id=student_id,
+        unh_id=unh_id, last_name=last_name, first_name=first_name,
+        school_email=school_email, major=major,
+        degree=degree, linkedin=linkedin
+    )
+    import_s.save()
 
 def import_student(sheet):
     """
@@ -273,6 +305,32 @@ def import_student(sheet):
         )
         import_s.save()
 
+
+def import_internship_csv(dt):
+    internship_id = str(dt['Row Count'])
+    position = dt['Internship Position']
+    pay = dt[' Pay ']
+    organization_name = dt['Organization']
+    organization_url = dt['URL']
+    organization_address = dt['Mailing Address']
+    supervisor_name = dt['Supervisor Name']
+    supervisor_position = dt['Supervisor Position']
+    supervisor_email = dt['Supervisor Email']
+    supervisor_phone = dt['Supervisor Phone']
+
+    import_i = Internship(
+        internship_id=internship_id,
+        position=position,
+        pay=pay,
+        organization_name=organization_name,
+        organization_url=organization_url,
+        organization_address=organization_address,
+        supervisor_name=supervisor_name,
+        supervisor_position=supervisor_position,
+        supervisor_email=supervisor_email,
+        supervisor_phone=supervisor_phone
+    )
+    import_i.save()
 
 def import_internship(sheet):
     """
@@ -304,6 +362,25 @@ def import_internship(sheet):
         )
         import_i.save()
 
+def import_internshipassignment_csv(dt):
+    course_id = dt['Course ID']
+    student_credits = dt['Credits']
+    semester = dt['Semester\xa0']
+    year = dt['Year']
+    instructor = dt['Instructor']
+    start_date = f_data.date()
+    end_date = f_data.date()
+
+
+
+    import_ia = InternshipAssignment(
+        course_id=course_id, student_credits=student_credits,
+        semester=semester,
+        year=year,
+        instructor=instructor,
+        start_date=start_date, end_date=end_date
+    )
+    import_ia.save()
 
 def import_internshipassignment(sheet):
     """
