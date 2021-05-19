@@ -1,4 +1,5 @@
-{% load static %}<!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
   <head>
 
@@ -10,6 +11,7 @@
     rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <script src={% static 'main.js' %} defer></script>
     {% endblock %}
 
   </head>
@@ -17,16 +19,9 @@
   <body>
 
       <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-
-
-
-
         <div class="logo" style="width: 600px;">
-
           <h3> <a class="nav-link text-light"> UNH-Internship </a><h3>
-
           <!-- <img src="https://paulcollege.unh.edu/cep/sites/paulcollege.unh.edu.cep/themes/cep/logo.png"> -->
-
        </div>
        {% for group in user.groups.all %}
         {% if group.name == 'Instructor'  %}
@@ -57,7 +52,6 @@
               {% if user.is_authenticated %}
               <h3><a class="nav-link text-light" href="{% url 'logout' %}">Logout</a></h3>
               {% endif %}
-
               {% for group in user.groups.all %}
                {% if group.name == 'instructor'  %}
               <h3><a class="nav-link text-light" href="{% url 'remove_data' %}" onclick="return confirm('Are you sure to remove data?')">Remove data</a></h3>
@@ -65,21 +59,12 @@
            {% endfor %}
            </div>
       </nav>
-
     </div>
-
     <div style="padding-left:100px; table-layout:fixed ; width: 50%">
-
-
       {% block content %}
-
-
       {% endblock content %}
-
     </div> <!-- /container -->
-
     {% block modal %}{% endblock modal %}
-
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -91,9 +76,8 @@
 
       <!-- Your stuff: Third-party javascript libraries go here -->
 
-
+      <!-- custom css & js-->
       <!-- place project specific Javascript in this file -->
-
     {% endblock javascript %}
   </body>
 </html>

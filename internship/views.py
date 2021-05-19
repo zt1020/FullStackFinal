@@ -24,6 +24,10 @@ from .forms import InternshipAssignmentSearchForm, StudentForm, InternshipForm
 from .roles import allowed_users
 from django.contrib import messages
 from django.utils.decorators import method_decorator
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import StudentSerializer
+from .models import Student
 
 
 f_data = Faker()
@@ -518,3 +522,52 @@ def remove_data(request):
     InternshipAssignment.objects.all().delete()  # pylint: disable = no-member
     Internship.objects.all().delete()  # pylint: disable = no-member
     return render(request, 'home.html')
+
+
+@api_view(['GET'])
+def apiOverview(request):
+    api_urls = {
+        'Student List': 'studentList/',
+        'Student Detail' : 'studentDetail/<str:pk>/',
+        'Create' : '/task-create/',
+        'Update' : '/task-update/<str:pk>',
+        'Delete' : '/task-delete/<str:pk>',
+
+    }
+    return Response(api_urls)
+
+
+@api_view(['GET'])
+def studentList(request):
+    student = Student.objects.all()
+    serializer = StudentSerializer(student, many = True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def studentDetail(request,pk):
+    student = Student.objects.get(student_id=pk)
+    serializer = StudentSerializer(student, many = False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def studentCreate(request):
+    serializer = StudentSerializer(data = request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def studentUpdate(request,pk):
+    student = Student.objects.get(student_id=pk)
+    serializer = StudentSerializer(instance = student, data = request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def studentDelete(request,pk):
+    student = Student.objects.get(student_id=pk)
+    student.delete()
+    return Response(serializer.data)
