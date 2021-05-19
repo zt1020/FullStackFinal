@@ -3,13 +3,15 @@
 
 <br/>
 <br/>
-<form method="post" enctype="multipart/form-data">
+<form type = "" method="post" enctype="multipart/form-data" id = "upload-form">
     {% csrf_token %}
-    <input type="file" name="document">
+    <input type="file" name="document" id = "upload-document">
     &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-    <button type="submit"> Import </button>
+    {{form.as_p}}
+    <button type="submit" id = "submit"> Import </button>
 
 </form>
+<br>
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -17,4 +19,9 @@
     {% endfor %}
 </ul>
 {% endif %}
+<br>
+<div id = "progress-box" class = "not-visible">progress</div>
+<div id="cancel-box" class="not-visible">
+        <button id="cancel-btn" class="btn btn-danger">cancel</button>
+    </div>
 {% endblock content %}

@@ -23,6 +23,7 @@ from .roles import allowed_users
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 
+
 f_data = Faker()
 
 
